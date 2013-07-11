@@ -23,6 +23,8 @@ gem 'devise', '3.0.0.rc'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 
+gem 'quiet_assets'
+
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 
@@ -33,6 +35,14 @@ group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
 end
+
+group :development, :test do
+  gem 'rspec-rails', '~> 2.0'
+  gem "factory_girl_rails", "~> 4.0"
+  gem 'shoulda'
+  gem "better_errors"
+end
+
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
