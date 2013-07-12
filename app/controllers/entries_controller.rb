@@ -38,4 +38,15 @@ class EntriesController < ApplicationController
     @entry.destroy
     redirect_to entries_url, :notice => "Successfully destroyed entry."
   end
+
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_entry
+      @user = Entry.find(params[:id])
+    end
+
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def entry_params
+      params.require(:entry).permit(:type, :title, :message, :image)
+    end
 end
