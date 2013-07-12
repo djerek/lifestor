@@ -1,4 +1,9 @@
 <p id="notice"><%= notice %></p>
 
+
+<%= link_to 'create snapshot', new_entry_path(:type => 'snapshot') %>
+<%= link_to 'create happening', new_entry_path(:type => 'happening') %>
+<%= link_to 'create reflection', new_entry_path(:type => 'reflection') %>
+
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>

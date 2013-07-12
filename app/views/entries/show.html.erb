@@ -13,6 +13,14 @@
   <%= @entry.image %>
 </p>
 
+<% if 
+<%= form_for Entry.new, :remote => true do |f| %>
+  <%= f.hidden_field :type, value: 'snapshot' %>
+  <%= f.text_field :content %>
+
+  <%= f.submit "Send" %>
+<% end %>
+
 <p>
   <%= link_to "Edit", edit_entry_path(@entry) %> |
   <%= link_to "Destroy", @entry, :confirm => 'Are you sure?', :method => :delete %> |

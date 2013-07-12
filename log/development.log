@@ -45,3 +45,85 @@ Migrating to CreateTags (20130712174908)
   [1m[35mSQL (2.5ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20130712174908"]]
   [1m[36m (11.9ms)[0m  [1mcommit transaction[0m
   [1m[35mActiveRecord::SchemaMigration Load (4.9ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mActiveRecord::SchemaMigration Load (1.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (1.4ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mActiveRecord::SchemaMigration Load (1.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (1.3ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+
+
+Started GET "/" for 10.0.2.2 at 2013-07-12 18:30:21 +0000
+Processing by UsersController#index as HTML
+Completed 401 Unauthorized in 90ms
+
+
+Started GET "/login" for 10.0.2.2 at 2013-07-12 18:30:21 +0000
+Processing by Devise::SessionsController#new as HTML
+  Rendered devise/shared/_links.erb (2.2ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (211.4ms)
+Completed 200 OK in 3191ms (Views: 3152.3ms | ActiveRecord: 1.6ms)
+
+
+Started GET "/" for 10.0.2.2 at 2013-07-12 18:30:33 +0000
+Processing by UsersController#index as HTML
+Completed 401 Unauthorized in 1ms
+
+
+Started GET "/login" for 10.0.2.2 at 2013-07-12 18:44:39 +0000
+Processing by Devise::SessionsController#new as HTML
+  Rendered devise/shared/_links.erb (0.4ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (26.5ms)
+Completed 200 OK in 154ms (Views: 151.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_up" for 10.0.2.2 at 2013-07-12 18:44:47 +0000
+Processing by Devise::RegistrationsController#new as HTML
+  Rendered devise/shared/_links.erb (0.5ms)
+  Rendered devise/registrations/new.html.erb within layouts/application (27.1ms)
+Completed 200 OK in 168ms (Views: 165.9ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 10.0.2.2 at 2013-07-12 18:45:18 +0000
+Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"37xY8xx1DAtX5AGTgPIoeExWTtn9VNBpClJd4Iqmimw=", "user"=>{"email"=>"a@a", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up"}
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35mUser Exists (1.8ms)[0m  SELECT 1 AS one FROM "users" WHERE "users"."email" = 'a@a' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  Rendered devise/shared/_links.erb (0.5ms)
+  Rendered devise/registrations/new.html.erb within layouts/application (28.5ms)
+Completed 200 OK in 461ms (Views: 156.5ms | ActiveRecord: 2.1ms)
+
+
+Started POST "/users" for 10.0.2.2 at 2013-07-12 18:45:24 +0000
+Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"37xY8xx1DAtX5AGTgPIoeExWTtn9VNBpClJd4Iqmimw=", "user"=>{"email"=>"a@a.a", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up"}
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (1.4ms)[0m  [1mSELECT 1 AS one FROM "users" WHERE "users"."email" = 'a@a.a' LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+  Rendered devise/shared/_links.erb (0.4ms)
+  Rendered devise/registrations/new.html.erb within layouts/application (31.4ms)
+Completed 200 OK in 224ms (Views: 162.6ms | ActiveRecord: 1.6ms)
+
+
+Started POST "/users" for 10.0.2.2 at 2013-07-12 18:45:29 +0000
+Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"37xY8xx1DAtX5AGTgPIoeExWTtn9VNBpClJd4Iqmimw=", "user"=>{"email"=>"a@a.a", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up"}
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35mUser Exists (1.4ms)[0m  SELECT 1 AS one FROM "users" WHERE "users"."email" = 'a@a.a' LIMIT 1
+Binary data inserted for `string` type on column `encrypted_password`
+  [1m[36mSQL (87.4ms)[0m  [1mINSERT INTO "users" ("created_at", "email", "encrypted_password", "updated_at") VALUES (?, ?, ?, ?)[0m  [["created_at", Fri, 12 Jul 2013 18:45:29 UTC +00:00], ["email", "a@a.a"], ["encrypted_password", "$2a$10$DEvOy9UiwidHlIOvk68TEexM3IRGMkcQ92NpDenzA.fnJLApsnqmK"], ["updated_at", Fri, 12 Jul 2013 18:45:29 UTC +00:00]]
+  [1m[35m (7.1ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+Binary data inserted for `string` type on column `last_sign_in_ip`
+Binary data inserted for `string` type on column `current_sign_in_ip`
+  [1m[35mSQL (5.1ms)[0m  UPDATE "users" SET "last_sign_in_at" = ?, "current_sign_in_at" = ?, "last_sign_in_ip" = ?, "current_sign_in_ip" = ?, "sign_in_count" = ?, "updated_at" = ? WHERE "users"."id" = 1  [["last_sign_in_at", Fri, 12 Jul 2013 18:45:29 UTC +00:00], ["current_sign_in_at", Fri, 12 Jul 2013 18:45:29 UTC +00:00], ["last_sign_in_ip", "10.0.2.2"], ["current_sign_in_ip", "10.0.2.2"], ["sign_in_count", 1], ["updated_at", Fri, 12 Jul 2013 18:45:29 UTC +00:00]]
+  [1m[36m (2.5ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 259ms (ActiveRecord: 103.8ms)
+
+
+Started GET "/" for 10.0.2.2 at 2013-07-12 18:45:30 +0000
+Processing by UsersController#index as HTML
+  [1m[35mUser Load (1.6ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1
+  [1m[36mUser Load (1.5ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  Rendered users/index.html.erb within layouts/application (4.4ms)
+Completed 200 OK in 183ms (Views: 137.2ms | ActiveRecord: 3.1ms)
