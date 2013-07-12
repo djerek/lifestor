@@ -49,8 +49,8 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.3)
-    debug_inspector (0.0.2)
     commonjs (0.2.6)
+    debug_inspector (0.0.2)
     devise (3.0.0.rc)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
@@ -179,8 +179,8 @@ GEM
     shoulda-context (1.1.4)
     shoulda-matchers (2.2.0)
       activesupport (>= 3.0.0)
-    slop (3.4.5)
     simple_form (1.4.1)
+    slop (3.4.5)
     sprockets (2.10.0)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -233,10 +233,10 @@ DEPENDENCIES
   jbuilder (~> 1.0.1)
   jquery-rails
   launchy
+  less-rails-bootstrap (~> 2.3.3)
   mocha
   nifty-generators
   pry
-  less-rails-bootstrap (~> 2.3.3)
   quiet_assets
   rails (= 4.0.0.rc1)
   rspec-rails (~> 2.0)

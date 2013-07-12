@@ -38,4 +38,14 @@ class LocationsController < ApplicationController
     @location.destroy
     redirect_to locations_url, :notice => "Successfully destroyed location."
   end
+
+  private
+
+    def set_location
+      @location = Location.find(params[:id])
+    end
+
+    def location_params
+      params.require(:location).permit(:title)
+    end
 end

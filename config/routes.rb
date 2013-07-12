@@ -1,4 +1,8 @@
 Project2::Application.routes.draw do
+  get "cover/home"
+  get "cover/help"
+  get "static_pages/home"
+  get "static_pages/help"
   resources :entries
   resources :locations
   devise_for :users, :skip => [:sessions]
