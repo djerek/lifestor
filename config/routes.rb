@@ -1,4 +1,6 @@
 Project2::Application.routes.draw do
+  resources :entries
+  resources :locations
   devise_for :users, :skip => [:sessions]
   resources :users
 
