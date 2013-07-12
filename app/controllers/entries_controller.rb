@@ -12,7 +12,7 @@ class EntriesController < ApplicationController
   end
 
   def create
-    @entry = Entry.new(params[:entry])
+    @entry = Entry.new(entry_params)
     if @entry.save
       redirect_to @entry, :notice => "Successfully created entry."
     else
@@ -47,6 +47,6 @@ class EntriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def entry_params
-      params.require(:entry).permit(:type, :title, :message, :image)
+      params.require(:entry).permit(:message_type, :title, :message, :image)
     end
 end
