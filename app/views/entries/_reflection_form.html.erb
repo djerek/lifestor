@@ -23,5 +23,8 @@
     <%= f.label :image %><br />
     <%= f.text_field :image %>
   </p>
+  
+  <%= f.hidden_field :message_type, value: 'reflection' %>
+
   <p><%= f.submit %></p>
 <% end %>

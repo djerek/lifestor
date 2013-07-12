@@ -23,6 +23,8 @@
     <%= f.label :image %><br />
     <%= f.text_field :image %>
   </p>
+  <%= f.hidden_field :message_type, value: 'happening' %>
+
    
   <p><%= button_to 'submit', root_path %></p>
 <% end %>
