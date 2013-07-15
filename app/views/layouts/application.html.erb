@@ -10,8 +10,8 @@
   <p class="notice"><%= notice %></p>
   <p class="alert"><%= alert %></p>
   <% if user_signed_in? %>
-    You are <%= current_user.email %>
-    <%= link_to "Logout", destroy_user_session_path %>
+    <p>You are <%= current_user.email %>
+    <%= link_to "Logout", destroy_user_session_path %></p>
   <% else %>
     <%= link_to "Sign in", new_user_session_path %> or <%= link_to "sign up", new_user_registration_path %>
   <% end %>

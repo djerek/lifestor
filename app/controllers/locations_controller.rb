@@ -3,6 +3,13 @@ class LocationsController < ApplicationController
     @locations = Location.all
   end
 
+  def showmap
+    respond_to do |format|
+      format.html { }
+      format.js { render 'showmap' }
+    end
+  end
+
   def show
     @location = Location.find(params[:id])
   end
