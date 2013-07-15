@@ -1,4 +1,11 @@
-<% title "Entries" %>
+<h3>Entries</h3>
+
+<%= form_tag entries_path, :method => :get do %>
+<p>
+  <%= text_field_tag :search, params[:search] %>
+  <%= submit_tag "Search", :name => nil %>
+</p>
+<% end %>
 
 <table>
   <tr>
@@ -17,5 +24,8 @@
     </tr>
   <% end %>
 </table>
+
+
+
 
 <p><%= link_to "New Entry", new_entry_path %></p>

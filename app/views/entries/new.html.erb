@@ -1,5 +1,10 @@
-<% title "New Entry" %>
-
-<%= render 'form' %>
+<% "New Entry" %>
+<% if params[:message_type] == 'snapshot' %>
+<%= render 'snapshot_form' %>
+<% elsif params[:message_type] == 'happening' %>
+<%= render 'happening_form' %>
+<% elsif params[:message_type] == 'reflection' %>
+<%= render 'reflection_form' %>
+<% end %>
 
 <p><%= link_to "Back to List", entries_path %></p>
