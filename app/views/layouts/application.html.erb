@@ -18,5 +18,10 @@
 
 <%= yield %>
 
+<script type="text/javascript">
+   $('.dropdown-menu').on('click', function (e) {
+     e.stopPropagation()
+     });</script>
+
 </body>
 </html>

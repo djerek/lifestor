@@ -11,3 +11,11 @@
  *= require_self
  *= require_tree .
  */
+
+.dropdown {
+  font-weight: bold;
+}
+
+.dropdown-menu {
+  font-weight: normal;
+}
