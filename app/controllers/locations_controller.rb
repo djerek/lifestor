@@ -1,6 +1,10 @@
 class LocationsController < ApplicationController
   def index
     @locations = Location.all
+      respond_to do |format|
+      format.html { }
+      format.js { render 'index' }
+    end
   end
 
   def showmap
