@@ -137,7 +137,8 @@ function placeMarker(location) {
       map: map
   });
 
-  var contentString = "hellooo";
+  console.log(marker.position);
+  var contentString = "<a href='" + $('#new_entry_path').data('path') + "&lat=" + marker.position.jb + "&long=" + marker.position.kb +  "'>Click to add</a>"
 
   var infowindow = new google.maps.InfoWindow({
     content: contentString

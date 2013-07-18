@@ -19,7 +19,6 @@ ActiveRecord::Schema.define(version: 20130712205459) do
     t.string   "image"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "type"
     t.string   "message_type"
   end
 
