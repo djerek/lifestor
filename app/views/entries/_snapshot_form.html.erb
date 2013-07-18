@@ -24,8 +24,21 @@
     <%= f.text_field :image %>
   </p>
   <%= f.hidden_field :message_type, value: 'snapshot' %>
-  <%= f.hidden_field :latitude, value: params[:latitude] %>
-  <%= f.hidden_field :longitude, value: params[:longitude] %>
+
+   <p>
+    <%= f.label :latitude %><br />
+    <%= f.text_field :latitude, value: params[:latitude] %>
+  </p>
+
+   <p>
+    <%= f.label :longitude %><br />
+    <%= f.text_field :longitude, value: params[:longitude] %>
+  </p>
+
+  <%= check_box_tag(:current_location) %>
+  <%= label_tag(:current_location, "use this location") %>
+
+  <%= link_to "use current_location", locations_current_location_path, remote: true %>
 
   
   <p><%= f.submit %></p>

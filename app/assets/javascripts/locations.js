@@ -58,8 +58,8 @@ function HomeControl(controlDiv, map, home) {
   // simply set the map to the control's current home property.
   google.maps.event.addDomListener(goHomeUI, 'click', function() {
     var currentHome = control.getHome();
-    currentHome.jb = gon.current_user.latitude
-    currentHome.kb = gon.current_user.longitude
+    currentHome.jb = addressLatitude
+    currentHome.kb = addressLongitude
     console.log(currentHome);
     map.setCenter(currentHome);
   });
@@ -71,9 +71,11 @@ function HomeControl(controlDiv, map, home) {
 
 ///////////////////
 
+var geocoder;
 var map;
 
 function initialize() {
+  geocoder = new google.maps.Geocoder();
   var mapOptions = {
     zoom: 8,
     mapTypeId: google.maps.MapTypeId.HYBRID
@@ -95,6 +97,19 @@ function initialize() {
         map: map,
         position: pos,
         content: 'click on the map to add a marker'
+          + "<br>current latitude: " + position.coords.latitude
+          + "<br>current longitude: " + position.coords.longitude
+      });
+
+      var address = gon.current_user.address;
+        console.log(address)
+      geocoder.geocode( { 'address': address}, function(results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+          addressLatitude = results[0].geometry.location.jb
+          addressLongitude = results[0].geometry.location.kb
+        } else {
+          alert('Geocode was not successful for the following reason: ' + status);
+        }
       });
 
       // Create the DIV to hold the control and

@@ -7,6 +7,13 @@ class LocationsController < ApplicationController
     end
   end
 
+  def current_location
+    respond_to do |format|
+      format.html { redirect_to :root }
+      format.js { render 'current_location' }
+    end
+  end
+
   def showmap
     gon.entries = current_user.entries
     gon.current_user = current_user

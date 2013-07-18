@@ -4,6 +4,7 @@ Project2::Application.routes.draw do
   get "static_pages/home"
   get "static_pages/help"
   get "locations/showmap"
+  get "locations/current_location"
   resources :entries
   resources :locations
   devise_for :users, :skip => [:sessions]
