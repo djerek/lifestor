@@ -72,6 +72,9 @@ function HomeControl(controlDiv, map, home) {
   // simply set the map to the control's current home property.
   google.maps.event.addDomListener(goHomeUI, 'click', function() {
     var currentHome = control.getHome();
+    currentHome.jb = current_user.latitude
+    currentHome.kb = current_user.longitude
+    console.log(currentHome);
     map.setCenter(currentHome);
   });
 
