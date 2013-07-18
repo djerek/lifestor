@@ -138,7 +138,7 @@ function placeMarker(location) {
   });
 
   console.log(marker.position);
-  var contentString = "<a href='" + $('#new_entry_path').data('path') + "&lat=" + marker.position.jb + "&long=" + marker.position.kb +  "'>Click to add</a>"
+  var contentString = "<a href='" + $('#new_entry_path').data('path') + "&latitude=" + marker.position.jb + "&longitude=" + marker.position.kb +  "'>Click to add</a>"
 
   var infowindow = new google.maps.InfoWindow({
     content: contentString

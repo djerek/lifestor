@@ -24,7 +24,8 @@
     <%= f.text_field :image %>
   </p>
   <%= f.hidden_field :message_type, value: 'snapshot' %>
-
+  <%= f.hidden_field :latitude, value: params[:latitude] %>
+  <%= f.hidden_field :longitude, value: params[:longitude] %>
 
   
   <p><%= f.submit %></p>
