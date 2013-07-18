@@ -1,5 +1,8 @@
-<%= content_tag :div, id: "new_entry_path", data: {path: new_entry_path(:message_type => 'snapshot')} do %>
-  blash
-<% end %>
+    <%= content_tag :div, id: "new_entry_path", data: {path: new_entry_path(:message_type => 'snapshot')} do %>
+    blash
+    <%= current_user.latitude %>
+    <% end %>
 
-<div id="map-canvas"></div>
+    
+    <div id="map-canvas"></div>
+    
