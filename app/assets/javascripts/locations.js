@@ -1,3 +1,5 @@
+// alert(gon.entries)
+
 /**
  * The HomeControl adds a control to the map that
  * returns the user to the control's defined home.
@@ -86,6 +88,7 @@ function HomeControl(controlDiv, map, home) {
 ///////////////////
 
 var map;
+var windowOpen = false;
 
 function initialize() {
   var mapOptions = {
@@ -128,6 +131,36 @@ function initialize() {
     // Browser doesn't support Geolocation
     handleNoGeolocation(false);
   }
+
+  // var aPos = new google.maps.LatLng(41,-73);
+  // var anIW = new google.maps.Marker({
+  //       map: map,
+  //       position: aPos,
+  //       // content: 'a window here'
+  //     });
+
+  $.each(gon.entries, markerAtLocations);
+
+}
+
+function markerAtLocations(index, entry) {
+  var pos = new google.maps.LatLng(entry.latitude, entry.longitude)
+  // alert(entry.latitude + "<--latitude, longitude-->" + entry.longitude)
+  var marker = new google.maps.Marker({
+    map: map,
+    position: pos
+  });
+
+  var contentString = "title: " + entry.title + "<br>message: " + entry.message 
+    + "<br>latitude: " + entry.latitude + "<br>longitude: " + entry.longitude
+
+  var infowindow = new google.maps.InfoWindow({
+    content: contentString
+  });
+
+  google.maps.event.addListener(marker, 'click', function() {
+    infowindow.open(map,marker);
+  });
 
 }
 

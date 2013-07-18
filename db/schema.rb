@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20130718135547) do
     t.string   "image"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "type"
     t.string   "message_type"
     t.float    "latitude"
     t.float    "longitude"

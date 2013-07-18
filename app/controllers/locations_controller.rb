@@ -8,6 +8,15 @@ class LocationsController < ApplicationController
   end
 
   def showmap
+    gon.entries = Entry.all
+    gon.latitude = []
+    gon.longitude = []
+
+    Entry.all.each do |entry|
+      gon.latitude << entry.latitude
+      gon.longitude << entry.longitude
+    end
+
     respond_to do |format|
       format.html { }
       format.js { render 'showmap' }
