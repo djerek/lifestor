@@ -8,7 +8,7 @@ class LocationsController < ApplicationController
   end
 
   def showmap
-    gon.entries = Entry.all
+    gon.entries = current_user.entries
     gon.current_user = current_user
 
     respond_to do |format|
