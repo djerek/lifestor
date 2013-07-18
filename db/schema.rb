@@ -11,7 +11,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130716192538) do
+
+ActiveRecord::Schema.define(version: 20130718173626) do
+
 
   create_table "entries", force: true do |t|
     t.string   "title"
@@ -21,6 +23,8 @@ ActiveRecord::Schema.define(version: 20130716192538) do
     t.datetime "updated_at"
     t.string   "message_type"
     t.integer  "user_id"
+    t.float    "latitude"
+    t.float    "longitude"
   end
 
   add_index "entries", ["user_id"], name: "index_entries_on_user_id"
@@ -65,6 +69,8 @@ ActiveRecord::Schema.define(version: 20130716192538) do
     t.string   "last_sign_in_ip"
     t.string   "first_name"
     t.string   "last_name"
+    t.float    "latitude"
+    t.float    "longitude"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
