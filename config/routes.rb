@@ -1,11 +1,15 @@
-Project2::Application.routes.draw do
-  get "cover/home"
-  get "cover/help"
-  get "static_pages/home"
-  get "static_pages/help"
+Project2::Application.routes.draw do  
+  
+  # as :user do
+  #   get "login" => "devise/sessions#new", :as => :new_user_session
+  #   post 'login' => 'devise/sessions#create', :as => :user_session
+  #   match "logout" => "devise/sessions#destroy", :as => :destroy_user_session,
+  #     :via => Devise.mappings[:user].sign_out_via
+  # end
+
   resources :entries
   resources :locations
-  devise_for :users, :skip => [:sessions]
+  # devise_for :users, :skip => [:sessions], :controllers => { :registrations => "registrations" }
   resources :users
 
   # The priority is based upon order of creation: first created -> highest priority.
@@ -15,12 +19,10 @@ Project2::Application.routes.draw do
   # root 'welcome#index'
   root :to => "users#index"
 
-  as :user do
-    get "login" => "devise/sessions#new", :as => :new_user_session
-    post 'login' => 'devise/sessions#create', :as => :user_session
-    match "logout" => "devise/sessions#destroy", :as => :destroy_user_session,
-      :via => Devise.mappings[:user].sign_out_via
-  end
+  get 'welcome' => 'cover#welcome'
+  get 'home' => 'cover#home'
+  get "entries/tags" => "entries#tags", :as => :tags
+
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source 'http://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0.rc1'
@@ -37,6 +37,22 @@ gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.0.1'
 
+# Add new users
+
+gem 'faker', '1.1.2'
+
+# Time triggers
+
+gem 'whenever', :require => false
+
+# Tagging app
+
+gem "acts-as-taggable-on", "~> 2.4.1"
+
+# Update Whenever changes on deployment
+
+gem "capistrano", :group => :development
+
 # Better debugging
 gem "better_errors"
 gem "pry"
@@ -60,7 +76,6 @@ group :development, :test do
 end
 
 group :test do
-  gem 'faker'
   gem 'capybara'
   gem 'guard-rspec'
   gem 'launchy'

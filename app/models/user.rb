@@ -6,4 +6,14 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  require "#{Rails.root}/app/mailers/user_mailer" 
+
+  def full_name
+    first_name + " " + last_name
+  end
+
+  def reflection_mailer
+    @user = user.find(2)
+    UserMailer.reflection_email(@user).deliver
+  end
 end

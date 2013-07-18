@@ -15,3 +15,11 @@
 //= require twitter/bootstrap
 //= require turbolinks
 //= require_tree .
+
+$(function() {
+  $("#entry_tags").tokenInput("/entries/tags.json"), {
+    prePopulate: $("#entry_tags").data("pre"),
+    preventDuplicates: true,
+    noResultsText: "You have no tag with that name--but we will add the create new addition soon!",
+  };
+});

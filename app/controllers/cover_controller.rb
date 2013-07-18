@@ -5,6 +5,9 @@ class CoverController < ApplicationController
   def help
   end
 
+  def welcome
+  end
+
   def snapshot
   end
 
