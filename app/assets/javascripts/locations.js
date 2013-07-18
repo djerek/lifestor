@@ -88,7 +88,6 @@ function HomeControl(controlDiv, map, home) {
 ///////////////////
 
 var map;
-var windowOpen = false;
 
 function initialize() {
   var mapOptions = {
@@ -132,13 +131,6 @@ function initialize() {
     handleNoGeolocation(false);
   }
 
-  // var aPos = new google.maps.LatLng(41,-73);
-  // var anIW = new google.maps.Marker({
-  //       map: map,
-  //       position: aPos,
-  //       // content: 'a window here'
-  //     });
-
   $.each(gon.entries, markerAtLocations);
 
 }
@@ -154,12 +146,21 @@ function markerAtLocations(index, entry) {
   var contentString = "title: " + entry.title + "<br>message: " + entry.message 
     + "<br>latitude: " + entry.latitude + "<br>longitude: " + entry.longitude
 
-  var infowindow = new google.maps.InfoWindow({
-    content: contentString
-  });
+  var infowindow = null;
 
   google.maps.event.addListener(marker, 'click', function() {
-    infowindow.open(map,marker);
+    if (infowindow) {
+      infowindow.close();
+      infowindow = null;
+      console.log("closing");
+    }
+    else {
+      infowindow = new google.maps.InfoWindow({
+        content: contentString
+      });
+      infowindow.open(map,marker);
+      console.log("opening");
+    }
   });
 
 }
