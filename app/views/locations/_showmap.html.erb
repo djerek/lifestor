@@ -3,10 +3,6 @@
     <%= current_user.latitude %>
     <% end %>
 
-    <%= javascript_tag do %>
-  	latitude = current_user.latitude.to_json
-  	longitude = current_user.longitude
-
-  	<% end %>
+    
     <div id="map-canvas"></div>
     

@@ -29,6 +29,8 @@ gem 'devise', '3.0.0.rc'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 
+gem 'gon'
+
 gem 'quiet_assets'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks

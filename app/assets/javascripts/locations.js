@@ -1,3 +1,5 @@
+// alert(gon.entries)
+
 /**
  * The HomeControl adds a control to the map that
  * returns the user to the control's defined home.
@@ -11,9 +13,7 @@ HomeControl.prototype.getHome = function() {
   return this.home_;
 }
 
-HomeControl.prototype.setHome = function(home) {
-  this.home_ = home;
-}
+
 
 /** @constructor */
 function HomeControl(controlDiv, map, home) {
@@ -50,45 +50,29 @@ function HomeControl(controlDiv, map, home) {
   goHomeUI.appendChild(goHomeText);
 
   // Set CSS for the setHome control border
-  var setHomeUI = document.createElement('div');
-  setHomeUI.style.backgroundColor = 'white';
-  setHomeUI.style.borderStyle = 'solid';
-  setHomeUI.style.borderWidth = '2px';
-  setHomeUI.style.cursor = 'pointer';
-  setHomeUI.style.textAlign = 'center';
-  setHomeUI.title = 'Click to set Home to the current center';
-  controlDiv.appendChild(setHomeUI);
+ 
 
   // Set CSS for the control interior
-  var setHomeText = document.createElement('div');
-  setHomeText.style.fontFamily = 'Arial,sans-serif';
-  setHomeText.style.fontSize = '12px';
-  setHomeText.style.paddingLeft = '4px';
-  setHomeText.style.paddingRight = '4px';
-  setHomeText.innerHTML = '<b>Set Home</b>';
-  setHomeUI.appendChild(setHomeText);
-
+ 
   // Setup the click event listener for Home:
   // simply set the map to the control's current home property.
   google.maps.event.addDomListener(goHomeUI, 'click', function() {
     var currentHome = control.getHome();
-    currentHome.jb = current_user.latitude
-    currentHome.kb = current_user.longitude
+    currentHome.jb = gon.current_user.latitude
+    currentHome.kb = gon.current_user.longitude
     console.log(currentHome);
     map.setCenter(currentHome);
   });
 
   // Setup the click event listener for Set Home:
   // Set the control's home to the current Map center.
-  google.maps.event.addDomListener(setHomeUI, 'click', function() {
-    var newHome = map.getCenter();
-    control.setHome(newHome);
-  });
+  
 }
 
 ///////////////////
 
 var map;
+var windowOpen = false;
 
 function initialize() {
   var mapOptions = {
@@ -111,7 +95,7 @@ function initialize() {
       var infowindow = new google.maps.InfoWindow({
         map: map,
         position: pos,
-        content: 'Location found using HTML5.'
+        content: 'click on the map to add a marker'
       });
 
       // Create the DIV to hold the control and
@@ -131,6 +115,36 @@ function initialize() {
     // Browser doesn't support Geolocation
     handleNoGeolocation(false);
   }
+
+  // var aPos = new google.maps.LatLng(41,-73);
+  // var anIW = new google.maps.Marker({
+  //       map: map,
+  //       position: aPos,
+  //       // content: 'a window here'
+  //     });
+
+  $.each(gon.entries, markerAtLocations);
+
+}
+
+function markerAtLocations(index, entry) {
+  var pos = new google.maps.LatLng(entry.latitude, entry.longitude)
+  // alert(entry.latitude + "<--latitude, longitude-->" + entry.longitude)
+  var marker = new google.maps.Marker({
+    map: map,
+    position: pos
+  });
+
+  var contentString = "title: " + entry.title + "<br>message: " + entry.message 
+    + "<br>latitude: " + entry.latitude + "<br>longitude: " + entry.longitude
+
+  var infowindow = new google.maps.InfoWindow({
+    content: contentString
+  });
+
+  google.maps.event.addListener(marker, 'click', function() {
+    infowindow.open(map,marker);
+  });
 
 }
 
