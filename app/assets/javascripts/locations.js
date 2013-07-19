@@ -93,10 +93,16 @@ function initialize() {
       var pos = new google.maps.LatLng(position.coords.latitude,
                                        position.coords.longitude);
 
+      var currentLocationWindow = "<a href='" + $('#new_entry_path').data('path') 
+      + "&latitude=" + pos.jb 
+      + "&longitude=" + pos.kb 
+      +  "'>Make entry at current location</a>"
+
       var infowindow = new google.maps.InfoWindow({
         map: map,
         position: pos,
-        content: 'click on the map to add a marker'
+
+        content: currentLocationWindow + '<br>click on the map to add a marker'
           + "<br>current latitude: " + position.coords.latitude
           + "<br>current longitude: " + position.coords.longitude
       });

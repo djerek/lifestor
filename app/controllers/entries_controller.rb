@@ -9,6 +9,9 @@ class EntriesController < ApplicationController
 
   def new
     @entry = Entry.new
+    @huh = "hello worldo"
+    @lat = params[:latitude]
+    @long = params[:longitude]
   end
 
   def create
