@@ -30,7 +30,7 @@ Longitude is <%= @long %><br>
 
   <p>
     <%= f.label :address %><br />
-    <%= f.text_field :address %>
+    <%= f.text_field :address, value: params[:address] %>
   </p>
 
    <p>
@@ -51,6 +51,12 @@ Longitude is <%= @long %><br>
   </div>
 
   <br>
+
+  <p>ANOTHER ADDRESS</p>
+  <div>
+    <input id="address" type="textbox" value="New York, NY" style="margin-left: 100px;">
+    <input type="button" value="find a place" onclick="codeAddress()">
+  </div>
   
   <p><%= f.submit %></p>
 <% end %>
