@@ -29,6 +29,11 @@ Longitude is <%= @long %><br>
   <%= f.hidden_field :message_type, value: 'snapshot' %>
 
   <p>
+    <%= f.label :address %><br />
+    <%= f.text_field :address %>
+  </p>
+
+   <p>
     <%= f.label :latitude %><br />
     <%= f.text_field :latitude, value: params[:latitude] %>
   </p>
