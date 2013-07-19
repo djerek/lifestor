@@ -11,9 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
 ActiveRecord::Schema.define(version: 20130718173626) do
-
 
   create_table "entries", force: true do |t|
     t.string   "title"
