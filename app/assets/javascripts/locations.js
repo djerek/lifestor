@@ -75,6 +75,7 @@ var geocoder;
 var map;
 
 function initialize() {
+
   geocoder = new google.maps.Geocoder();
   var mapOptions = {
     zoom: 8,
@@ -101,16 +102,19 @@ function initialize() {
           + "<br>current longitude: " + position.coords.longitude
       });
 
+      
+      // Current User Home Address is turned into lat and long
+
       var address = gon.current_user.address;
-        console.log(address)
-      geocoder.geocode( { 'address': address}, function(results, status) {
-        if (status == google.maps.GeocoderStatus.OK) {
-          addressLatitude = results[0].geometry.location.jb
-          addressLongitude = results[0].geometry.location.kb
-        } else {
-          alert('Geocode was not successful for the following reason: ' + status);
-        }
-      });
+// console.log(address)
+  geocoder.geocode( { 'address': address}, function(results, status) {
+    if (status == google.maps.GeocoderStatus.OK) {
+      addressLatitude = results[0].geometry.location.jb
+      addressLongitude = results[0].geometry.location.kb
+    } else {
+      alert('Geocode was not successful for the following reason: ' + status);
+    }
+  });
 
       // Create the DIV to hold the control and
       // call the HomeControl() constructor passing
@@ -135,12 +139,40 @@ function initialize() {
 }
 
 function markerAtLocations(index, entry) {
-  var pos = new google.maps.LatLng(entry.latitude, entry.longitude)
+  // var pos = new google.maps.LatLng(entry.latitude, entry.longitude)
+  // console.log("pos before geocode")
+  // console.log(pos)
+  var address = entry.address
+  geocoder.geocode( { 'address': address}, function(results, status) {
+    if (status == google.maps.GeocoderStatus.OK) {
+      entryaddresslatitude = results[0].geometry.location.jb
+      entryaddresslongitude = results[0].geometry.location.kb
+      
+      console.log("entryaddresslongitude")
+      console.log(entryaddresslongitude)
+    } else {
+      alert('Geocode was not successful for the following reason: ' + status);
+    }
+
+  // console.log("entryaddresslatitude")
+  //     console.log(entryaddresslatitude)
+  var pos = new google.maps.LatLng(entryaddresslatitude, entryaddresslongitude)
+
+  // pos.jb = entryaddresslatitude
+  // pos.kb = entryaddresslongitude
+  console.log("pos")
+  console.log(pos)
+  
+  
   // alert(entry.latitude + "<--latitude, longitude-->" + entry.longitude)
   var marker = new google.maps.Marker({
     map: map,
     position: pos
   });
+
+
+  // console.log("marker.position")
+  // console.log(marker.position)
 
   var contentString = "title: " + entry.title + "<br>message: " + entry.message 
     + "<br>latitude: " + entry.latitude + "<br>longitude: " + entry.longitude
@@ -161,7 +193,7 @@ function markerAtLocations(index, entry) {
       console.log("opening");
     }
   });
-
+});
 }
 
 function placeMarker(location) {
@@ -201,4 +233,18 @@ function handleNoGeolocation(errorFlag) {
 
   var infowindow = new google.maps.InfoWindow(options);
   map.setCenter(options.position);
+}
+function codeAddress() {
+  var address = document.getElementById('address').value;
+  geocoder.geocode( { 'address': address}, function(results, status) {
+    if (status == google.maps.GeocoderStatus.OK) {
+      map.setCenter(results[0].geometry.location);
+      var marker = new google.maps.Marker({
+          map: map,
+          position: results[0].geometry.location
+      });
+    } else {
+      alert('Geocode was not successful for the following reason: ' + status);
+    }
+  });
 }
