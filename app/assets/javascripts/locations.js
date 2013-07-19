@@ -144,12 +144,19 @@ function markerAtLocations(index, entry) {
   // console.log(pos)
   var address = entry.address
   geocoder.geocode( { 'address': address}, function(results, status) {
-    if (status == google.maps.GeocoderStatus.OK) {
+    console.log("this is the address")
+    console.log(address)
+    if (address == "") {
+      entryaddresslatitude = entry.latitude
+      entryaddresslongitude = entry.longitude
+      console.log('entryaddresslatitude when address = ""')
+      console.log(entryaddresslatitude)
+    } else if (status == google.maps.GeocoderStatus.OK) {
       entryaddresslatitude = results[0].geometry.location.jb
       entryaddresslongitude = results[0].geometry.location.kb
       
-      console.log("entryaddresslongitude")
-      console.log(entryaddresslongitude)
+      console.log("entryaddresslatitude when address is a thing")
+      console.log(entryaddresslatitude)
     } else {
       alert('Geocode was not successful for the following reason: ' + status);
     }
