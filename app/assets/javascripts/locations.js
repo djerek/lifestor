@@ -208,7 +208,7 @@ function markerAtLocations(index, entry) {
       console.log("opening");
     }
   });
-  
+
 }
 
 function handleNoGeolocation(errorFlag) {
@@ -226,30 +226,4 @@ function handleNoGeolocation(errorFlag) {
 
   var infowindow = new google.maps.InfoWindow(options);
   map.setCenter(options.position);
-}
-
-function codeAddress() {
-  var address = document.getElementById('address').value;
-  geocoder.geocode( { 'address': address}, function(results, status) {
-    if (status == google.maps.GeocoderStatus.OK) {
-      map.setCenter(results[0].geometry.location);
-      var marker = new google.maps.Marker({
-          map: map,
-          position: results[0].geometry.location
-      });
-
-      var contentString = "<a href='" + $('#new_entry_path').data('path') + "&latitude=" + marker.position.jb + "&longitude=" + marker.position.kb + "&address=" + address + "'>Click to add</a>"
-      var infowindow = new google.maps.InfoWindow({
-        content: "address: " + address + "<br>" + contentString
-      });
-      infowindow.open(map,marker);
-
-      google.maps.event.addListener(marker, 'click', function() {
-        infowindow.open(map,marker);
-      });
-
-    } else {
-      alert('Geocode was not successful for the following reason: ' + status);
-    }
-  });
 }
