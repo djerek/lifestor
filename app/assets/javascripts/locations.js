@@ -1,3 +1,4 @@
+
 // alert(gon.entries)
 
 /**
@@ -73,12 +74,13 @@ function HomeControl(controlDiv, map, home) {
 
 var geocoder;
 var map;
+var infowindow;
 
 function initialize() {
 
   geocoder = new google.maps.Geocoder();
   var mapOptions = {
-    zoom: 8,
+    zoom: 18,
     mapTypeId: google.maps.MapTypeId.HYBRID
   };
   map = new google.maps.Map(document.getElementById("map-canvas"),
@@ -98,6 +100,16 @@ function initialize() {
       + "&latitude=" + pos.jb 
       + "&longitude=" + pos.kb 
       +  "'>Make entry at current location</a>"
+
+    var request = {
+    location: pos,
+    radius: 80,
+    types: ['store','bar', 'bank', 'casino', 'park']
+  };
+
+   infowindowplace = new google.maps.InfoWindow();
+  var service = new google.maps.places.PlacesService(map);
+  service.nearbySearch(request, callback);
 
       var infowindow = new google.maps.InfoWindow({
         map: map,
@@ -142,6 +154,31 @@ function initialize() {
 
   $.each(gon.entries, markerAtLocations);
 
+}
+
+function callback(results, status) {
+  if (status == google.maps.places.PlacesServiceStatus.OK) {
+    for (var i = 0; i < results.length; i++) {
+      createMarker(results[i]);
+    }
+  }
+}
+
+function createMarker(place) {
+alert(place.name)
+  var placeLoc = place.geometry.location;
+  var marker = new google.maps.Marker({
+    map: map,
+    position: place.geometry.location
+  });
+  console.log('marker.position.jb')
+  console.log(marker.position.jb)
+  
+
+  google.maps.event.addListener(marker, 'click', function() {
+    infowindowplace.setContent(place.name + "<a href='" + $('#new_entry_path').data('path') + "&latitude=" + marker.position.jb + "&longitude=" + marker.position.kb + "&address=" + address + "'>Click to add</a>");
+    infowindowplace.open(map, this);
+  });
 }
 
 function markerAtLocations(index, entry) {
