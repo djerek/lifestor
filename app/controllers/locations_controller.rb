@@ -16,7 +16,31 @@ class LocationsController < ApplicationController
 
   def showmap
     gon.entries = current_user.entries
+    gon.locations = current_user.locations
     gon.current_user = current_user
+
+
+    gon.location_entries_array = []
+    # raise current_user.locations.to_yaml
+
+    # for each location, make an array
+    # first value of array is location object, following are entry objects
+    current_user.locations.each do |location|
+      temp = []
+      temp << location
+
+      location.entries.each do |entry|
+        temp << entry
+      end
+
+      gon.location_entries_array << temp
+    end
+    # raise gon.location_entries_array[0].length.to_yaml
+
+    # gon.locations = []
+      
+
+
 
     respond_to do |format|
       format.html { }

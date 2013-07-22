@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130722003234) do
+ActiveRecord::Schema.define(version: 20130722190110) do
 
   create_table "entries", force: true do |t|
     t.string   "title"
@@ -25,8 +25,10 @@ ActiveRecord::Schema.define(version: 20130722003234) do
     t.integer  "user_id"
     t.string   "address"
     t.string   "place"
+    t.integer  "location_id"
   end
 
+  add_index "entries", ["location_id"], name: "index_entries_on_location_id"
   add_index "entries", ["user_id"], name: "index_entries_on_user_id"
 
   create_table "locations", force: true do |t|
@@ -35,7 +37,11 @@ ActiveRecord::Schema.define(version: 20130722003234) do
     t.float    "longitude"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "address"
+    t.integer  "user_id"
   end
+
+  add_index "locations", ["user_id"], name: "index_locations_on_user_id"
 
   create_table "tags", force: true do |t|
     t.string   "title"
@@ -59,9 +65,11 @@ ActiveRecord::Schema.define(version: 20130722003234) do
     t.float    "latitude"
     t.float    "longitude"
     t.string   "address"
+    t.integer  "location_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["location_id"], name: "index_users_on_location_id"
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
 end

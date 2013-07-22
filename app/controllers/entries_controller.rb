@@ -16,8 +16,23 @@ class EntriesController < ApplicationController
 
   def create
     @entry = Entry.new(entry_params)
+
+    if !@entry.location
+      # no location id given
+      # raise "no location given".to_yaml
+      location = Location.new
+      location.latitude = @entry.latitude
+      location.longitude = @entry.longitude
+      location.address = @entry.address
+      location.user = current_user
+      @entry.location = location
+    elsif @entry.location.user != current_user
+      raise "what".to_yaml
+    end
+
     @entry.user = current_user
     if @entry.save
+      location.save
       redirect_to @entry, :notice => "Successfully created entry."
     else
       render :action => 'new'

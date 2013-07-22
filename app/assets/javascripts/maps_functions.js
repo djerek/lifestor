@@ -50,7 +50,7 @@ function codeAddress() {
 function formAddress() {
 
   // get what's typed in address input form
-  var address = document.getElementById('entry_address').value;
+  var address = document.getElementById('form-address').value;
 
   geocoder.geocode( { 'address': address}, function(results, status) {
 
@@ -65,8 +65,8 @@ function formAddress() {
       console.log("longitude!:")
       console.log(longitude)
 
-      $("#entry_latitude").val(results[0].geometry.location.jb);
-      $("#entry_longitude").val(results[0].geometry.location.kb);
+      $("#form-latitude").val(results[0].geometry.location.jb);
+      $("#form-longitude").val(results[0].geometry.location.kb);
 
     } else {
       alert('Geocode was not successful for the following reason: ' + status);
