@@ -134,6 +134,7 @@ function initialize() {
     }
   });
 
+
       // Create the DIV to hold the control and
       // call the HomeControl() constructor passing
       // in this DIV.
@@ -165,20 +166,34 @@ function callback(results, status) {
 }
 
 function createMarker(place) {
-alert(place.name)
+// alert(place.name)
   var placeLoc = place.geometry.location;
   var marker = new google.maps.Marker({
     map: map,
     position: place.geometry.location
   });
-  console.log('marker.position.jb')
-  console.log(marker.position.jb)
+  var reverselatlong = new google.maps.LatLng(marker.position.jb, marker.position.kb)
+  console.log("reverselatlong" + reverselatlong)
+  geocoder.geocode({'latLng': reverselatlong}, function(results, status) {
+    if (status == google.maps.GeocoderStatus.OK) {
+      if (results[1]) {
+        reversegeocode = results[1].formatted_address
+        console.log(reversegeocode)
   
 
-  google.maps.event.addListener(marker, 'click', function() {
-    infowindowplace.setContent(place.name + "<a href='" + $('#new_entry_path').data('path') + "&latitude=" + marker.position.jb + "&longitude=" + marker.position.kb + "&address=" + address + "'>Click to add</a>");
-    infowindowplace.open(map, this);
+  // google.maps.event.addListener(marker, 'click', function() {
+  //   infowindowplace.setContent(place.name + reversegeocode + "<a href='" + $('#new_entry_path').data('path') + "&latitude=" + marker.position.jb + "&longitude=" + marker.position.kb + "&address=" + reversegeocode + "&place=" + place.name + "'>Click to add</a>");
+  //   infowindowplace.open(map, this);
+  // });
+      } else {
+        alert('No results found');
+      }
+    } else {
+      alert('Geocoder failed due to: ' + status);
+    }
   });
+
+
 }
 
 function markerAtLocations(index, entry) {
@@ -188,8 +203,9 @@ function markerAtLocations(index, entry) {
     map: map,
     position: pos
   });
+  console.log(entry)
 
-  var contentString = "title: " + entry.title + "<br>message: " + entry.message 
+  var contentString = "<a href='" + $('#new_entry_path').data('path') + "&latitude=" + marker.position.jb + "&longitude=" + marker.position.kb + "'>add another entry to this location?</a>" + "     title: " + entry.title + "<br>message: " + entry.message 
     + "<br>latitude: " + entry.latitude + "<br>longitude: " + entry.longitude
 
   var infowindow = null;

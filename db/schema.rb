@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130719024223) do
+ActiveRecord::Schema.define(version: 20130722003234) do
 
   create_table "entries", force: true do |t|
     t.string   "title"
@@ -19,12 +19,12 @@ ActiveRecord::Schema.define(version: 20130719024223) do
     t.string   "image"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "type"
     t.string   "message_type"
     t.float    "latitude"
     t.float    "longitude"
     t.integer  "user_id"
     t.string   "address"
+    t.string   "place"
   end
 
   add_index "entries", ["user_id"], name: "index_entries_on_user_id"

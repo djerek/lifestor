@@ -35,6 +35,11 @@ Longitude is <%= @long %><br>
     <input type="button" value="use current location" onclick="formCurrentLocation()">
   </p>
 
+  <p>
+    <%= f.label :place %><br />
+    <%= f.text_field :place, value: params[:place] %>
+  </p>
+
    <p>
     <%= f.label :latitude %><br />
     <%= f.text_field :latitude, value: params[:latitude], :readonly => true %>
