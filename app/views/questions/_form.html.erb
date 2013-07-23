@@ -1,0 +1,12 @@
+<% Question.all.each do |question| %>
+  <% if question.is_active == true %>
+  <% @question = question %>
+
+    <fieldset>
+        <%= f.fields_for :answers do |builder| %>
+          <%= render 'answer_form', f: builder %>
+        <% end %> 
+    </fieldset>
+
+  <% end %>
+<% end %>
