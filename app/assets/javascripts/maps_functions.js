@@ -1,11 +1,65 @@
+function pickPlace() {
+
+    // defines request terms
+    var centerPlace;
+    if (!$('#placelat').data('latitude')) 
+    {
+  
+      // if(navigator.geolocation) {
+             
+      navigator.geolocation.getCurrentPosition(function(position) {
+        console.log('here')
+        centerPlace = new google.maps.LatLng(position.coords.latitude,
+                                         position.coords.longitude);
+
+        console.log("centerplace current location" + centerPlace)
+        
+      }, function() {
+        handleNoGeolocation(true);
+      });
+      nearPlace
+
+        // } else {
+        // Browser doesn't support Geolocation
+        // handleNoGeolocation(false);
+        //     }
+  
+    }
+    else
+    {
+      centerPlace = new google.maps.LatLng($('#placelat').data('latitude'), $('#placelong').data('longitude'));
+      console.log("centerplace after click" + centerPlace)
+      nearPlace
+
+    } 
+
+}
+function nearPlace() {
+    console.log("iiii " + centerPlace)
+    var request = {
+      location: centerPlace,
+      radius: 80,
+      types: ['store','bar', 'bank', 'casino', 'park'],
+      map: map };
+  
+    console.log(map + " after request")
+
+  // actually calls the request
+
+  var service = new google.maps.places.PlacesService(map);
+  console.log("map  " + map)
+  service.nearbySearch(request, callback);
+
+}
+
 function placeMarker(location) {
   var marker = new google.maps.Marker({
       position: location,
       map: map
   });
 
-  console.log(marker.position);
-  var contentString = "<a href='" + $('#new_entry_path').data('path') + "&latitude=" + marker.position.jb + "&longitude=" + marker.position.kb +  "'>Click to add</a>"
+
+  var contentString = "<a href='" + $('#new_entry_path').data('path') + "&latitude=" + marker.position.jb + "&longitude=" + marker.position.kb + "'>Click to add</a>"
 
   var infowindow = new google.maps.InfoWindow({
     content: contentString
@@ -18,6 +72,9 @@ function placeMarker(location) {
   });
 
   map.panTo(location);
+console.log("location:" + location)
+
+  
 }
 
 function codeAddress() {
@@ -29,6 +86,7 @@ function codeAddress() {
           map: map,
           position: results[0].geometry.location
       });
+
 
       var contentString = "<a href='" + $('#new_entry_path').data('path') + "&latitude=" + marker.position.jb + "&longitude=" + marker.position.kb + "&address=" + address + "'>Click to add</a>"
       var infowindow = new google.maps.InfoWindow({
@@ -47,6 +105,18 @@ function codeAddress() {
 }
 
 // get coordinates of place typed into entry form
+
+function formPlace(place) {
+  var placeLoc = document.getElementById('entry_place').value;
+  console.log(placeLoc.geometry)
+  var marker = new google.maps.Marker({
+    map: map,
+    position: placeLoc.geometry.location
+  });
+
+
+}
+
 function formAddress() {
 
   // get what's typed in address input form

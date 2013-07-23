@@ -100,16 +100,16 @@ function initialize() {
       + "&latitude=" + pos.jb 
       + "&longitude=" + pos.kb 
       +  "'>Make entry at current location</a>"
-
-    var request = {
-    location: pos,
-    radius: 80,
-    types: ['store','bar', 'bank', 'casino', 'park']
-  };
-
-   infowindowplace = new google.maps.InfoWindow();
-  var service = new google.maps.places.PlacesService(map);
-  service.nearbySearch(request, callback);
+// sets request to ask for stores, bars, ... near the location
+//     var request = {
+//     location: pos,
+//     radius: 80,
+//     types: ['store','bar', 'bank', 'casino', 'park']
+//   };
+// // actually calls the request
+//    infowindowplace = new google.maps.InfoWindow();
+//   var service = new google.maps.places.PlacesService(map);
+//   service.nearbySearch(request, callback);
 
       var infowindow = new google.maps.InfoWindow({
         map: map,
@@ -156,45 +156,50 @@ function initialize() {
   $.each(gon.entries, markerAtLocations);
 
 }
-
+// this returns a list of places and puts markers on them
 function callback(results, status) {
   if (status == google.maps.places.PlacesServiceStatus.OK) {
+    // var content ="";
     for (var i = 0; i < results.length; i++) {
-      createMarker(results[i]);
+      placeObject = results[i]
+      // content = content + placeObject.name + placeObject.vicinity;
+      $("#place-results").append('<li>' + placeObject.name + '</li>' + '<li>' + placeObject.vicinity + '</li>');
+      console.log("from callback" + placeObject.vicinity);
     }
   }
 }
 
-function createMarker(place) {
-// alert(place.name)
-  var placeLoc = place.geometry.location;
-  var marker = new google.maps.Marker({
-    map: map,
-    position: place.geometry.location
-  });
-  var reverselatlong = new google.maps.LatLng(marker.position.jb, marker.position.kb)
-  console.log("reverselatlong" + reverselatlong)
-  geocoder.geocode({'latLng': reverselatlong}, function(results, status) {
-    if (status == google.maps.GeocoderStatus.OK) {
-      if (results[1]) {
-        reversegeocode = results[1].formatted_address
-        console.log(reversegeocode)
+// function createMarker(place) {
+// // alert(place.name)
+//   var placeLoc = place.geometry.location;
+//   var marker = new google.maps.Marker({
+//     map: map,
+//     position: place.geometry.location
+//   });
+//   var reverselatlong = new google.maps.LatLng(marker.position.jb, marker.position.kb)
+//   console.log("reverselatlong" + reverselatlong)
+//   geocoder.geocode({'latLng': reverselatlong}, function(results, status) {
+//     if (status == google.maps.GeocoderStatus.OK) {
+//       if (results[1]) {
+//         reversegeocode = results[1].formatted_address
+//         console.log(reversegeocode)
   
 
-  // google.maps.event.addListener(marker, 'click', function() {
-  //   infowindowplace.setContent(place.name + reversegeocode + "<a href='" + $('#new_entry_path').data('path') + "&latitude=" + marker.position.jb + "&longitude=" + marker.position.kb + "&address=" + reversegeocode + "&place=" + place.name + "'>Click to add</a>");
-  //   infowindowplace.open(map, this);
-  // });
-      } else {
-        alert('No results found');
-      }
-    } else {
-      alert('Geocoder failed due to: ' + status);
-    }
-  });
+//   google.maps.event.addListener(marker, 'click', function() {
+//     alert(place.name + reversegeocode)
+//     // infowindowplace.setContent(place.name + reversegeocode + "<a href='" + $('#new_entry_path').data('path') + "&latitude=" + marker.position.jb + "&longitude=" + marker.position.kb + "&address=" + reversegeocode + "&place=" + place.name + "'>testing</a>");
+//     // infowindowplace.open(map, this);
+//   });
+//       } else {
+//         alert('No results found');
+//       }
+//     } else {
+//       alert('Geocoder failed due to: ' + status);
+//     }
+//   });
 
 
-}
+// }
 
 function markerAtLocations(index, entry) {
   var pos = new google.maps.LatLng(entry.latitude, entry.longitude)
