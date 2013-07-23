@@ -13,6 +13,8 @@ Longitude is <%= @long %><br>
       </ul>
     </div>
   <% end %>
+
+
   <%= f.hidden_field :type, value: 'snapshot' %>
   <p>
     <%= f.label :title %><br />
@@ -28,16 +30,25 @@ Longitude is <%= @long %><br>
   </p>
   <%= f.hidden_field :message_type, value: 'snapshot' %>
 
+<div id="place-results"></div>
   <p>
     <%= f.label :address %><br />
+
     <%= f.text_field :address, value: params[:address], :id => "form-address" %>
     <input type="button" value="pick this place" onclick="formAddress()">
+
     <input type="button" value="use current location" onclick="formCurrentLocation()">
   </p>
 
+<%= content_tag "div", id: "placelat", data: {latitude: params[:latitude]} do %>
+  <% end %>
+
+  <%= content_tag "div", id: "placelong", data: {longitude: params[:longitude]} do %>
+  <% end %>
   <p>
     <%= f.label :place %><br />
-    <%= f.text_field :place, value: params[:place] %>
+    <%= f.text_field :place %>
+    <input type="button" value="Show nearby places" onclick="pickPlace()">
   </p>
 
    <p>
@@ -58,6 +69,8 @@ Longitude is <%= @long %><br>
   </div>
 
   <br>
+
+  <div id="map-canvas" style="width: 0px; height: 0px; margin: 0px; margin-bottom: 0px;"></div>
 
 
   
