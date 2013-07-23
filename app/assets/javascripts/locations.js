@@ -1,4 +1,50 @@
+function areYouHome(addressLatitude, addressLongitude){
+   if(navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+    var whereAreYouPos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+    homeSpotLat = addressLatitude
+    homeSpotLong = addressLongitude
+    console.log('homespotlat' + homeSpotLat)
+       }, function() {
+      handleNoGeolocation(true);
+    });
+  } 
+  else
+  {
 
+    // Browser doesn't support Geolocation
+    handleNoGeolocation(false);
+  }
+}
+
+function whereAreYou(markerSpot, nearPlaceAlert){
+  if(navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+    var whereAreYouPos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+    whereAreYouPosLat = whereAreYouPos.jb
+    whereAreYouPosLong = whereAreYouPos.kb
+    markerSpotLat = markerSpot.position.jb
+    markerSpotLong = markerSpot.position.kb
+    markerSpotLatHigh = (markerSpotLat + .0005)
+    markerSpotLatLow = (markerSpotLat - .0005)
+    markerSpotLongHigh = (markerSpotLong + .0005)
+    markerSpotLongLow = (markerSpotLong - .0005)
+    console.log('markerspotlathigh' + markerSpotLatHigh + 'whereareyoupostlat' + whereAreYouPosLat)
+      if((markerSpotLatHigh >= whereAreYouPosLat) && (markerSpotLatLow <= whereAreYouPosLat) && (markerSpotLongHigh >= whereAreYouPosLong) && (markerSpotLongLow <= whereAreYouPosLong)) {
+        console.log(markerSpot)
+        alert(nearPlaceAlert)
+      }
+      }, function() {
+      handleNoGeolocation(true);
+    });
+  } 
+  else
+  {
+
+    // Browser doesn't support Geolocation
+    handleNoGeolocation(false);
+  }
+}
 // alert(gon.locations)
 // alert(gon.location_entries_array.length)
 
@@ -129,6 +175,7 @@ function initialize() {
 
       addressLatitude = gon.current_user.latitude
       addressLongitude = gon.current_user.longitude
+      areYouHome(addressLatitude, addressLongitude)
 
 
       // Create the DIV to hold the control and
@@ -150,6 +197,7 @@ function initialize() {
   }
 
   $.each(gon.location_entries_array, markerAtLocations);
+
 
 }
 // this returns a list of places and puts markers on them
@@ -207,19 +255,26 @@ function markerAtLocations(index, array) {
     map: map,
     position: pos
   });
-  console.log("location:")
-  console.log(location)
-
-
-
+  console.log("marker position in marker at locations" + marker.position)
+  markerSpot = marker
   var contentString = "<a href='" + $('#new_entry_path').data('path') + "&latitude=" + marker.position.jb + "&longitude=" + marker.position.kb + "'>add another entry to this location?</a>" 
     + "<br>title: " + array[0].title 
     + "<br>latitude: " + array[0].latitude + "<br>longitude: " + array[0].longitude
 
   for (var i = 1; i < array.length; i++) {
+
+    nearPlaceAlert = 'you made an entry near this spot, and you called it:' + array[i].title + 'and you said:' + array[i].message
+    whereAreYou(markerSpot, nearPlaceAlert)
+
     contentString = contentString + "<br>Entry " + i + " title: " + array[i].title
       + "<br>message: " + array[i].message
   }
+  
+  
+
+
+
+  
 
 
 
