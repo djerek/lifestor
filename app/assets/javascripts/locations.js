@@ -157,8 +157,16 @@ function initialize() {
 
       addressLatitude = gon.current_user.latitude
       addressLongitude = gon.current_user.longitude
-      console.log('address latitude in initialize' + addressLatitude)
-      areYouHome(addressLatitude, addressLongitude)
+      console.log(pos.jb)
+      console.log(addressLatitude)
+      console.log(pos.kb)
+      console.log(addressLongitude)
+      if((pos.jb > addressLatitude - 0.001 ) && (pos.jb < addressLatitude + 0.001) && (pos.kb > addressLongitude - 0.001) && (pos.kb < addressLongitude + 0.001)) {
+        console.log("FINALLY")
+      }
+      else {
+        console.log("not finally")
+      }
 
 
       // Create the DIV to hold the control and

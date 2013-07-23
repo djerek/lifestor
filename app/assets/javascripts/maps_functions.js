@@ -1,5 +1,49 @@
+// function closeToStuff() {
+//   // alert(gon.close_to_here[0][0].id)
+//   console.log("closeToStuff is loadin")
+//   // get current location
+//   if(navigator.geolocation) {
+//     navigator.geolocation.getCurrentPosition(function(position) {
+//       var pos = new google.maps.LatLng(position.coords.latitude,
+//                                        position.coords.longitude);
+      
+//       // set lat and long to current coordinates
+//       var current_lat = position.coords.latitude;
+//       var current_long = position.coords.longitude;
+
+//       // put code stuff here
+
+//       // alert(gon.close_to_here[0]);
+//       // console.log("after alert")
+
+//       var close_locations = [];
+//       for (var i = 0; i < gon.close_to_here.length; i++) {
+//         loc_lat = gon.close_to_here[i][1]
+//         loc_long = gon.close_to_here[i][2]
+//         if ( (current_lat > loc_lat - 0.3) && (current_lat < loc_lat + 0.3) ) {
+//           close_locations.push()
+//           console.log("success lat! " + loc_lat)
+//           alert("you are near: " + gon.close_to_here[i][0].title + "!")
+//         }
+//         else {
+//           console.log("unsuccess lat! " + loc_lat)
+//         }
+//       }
+
+//     }, function() {
+//       handleNoGeolocation(true);
+//     });
+
+//   } else {
+//     // Browser doesn't support Geolocation
+//     handleNoGeolocation(false);
+//   }
+// }
+
+
 function pickPlace() {
 
+  console.log("probs loading")
     // defines request terms
     var centerPlace;
     if (!$('#placelat').data('latitude')) 
@@ -121,7 +165,7 @@ function formPlace(place) {
 function formAddress() {
 
   // get what's typed in address input form
-  var address = document.getElementById('entry_address').value;
+  var address = document.getElementById('form-address').value;
 
   geocoder.geocode( { 'address': address}, function(results, status) {
 
@@ -136,8 +180,8 @@ function formAddress() {
       console.log("longitude!:")
       console.log(longitude)
 
-      $("#entry_latitude").val(results[0].geometry.location.jb);
-      $("#entry_longitude").val(results[0].geometry.location.kb);
+      $("#form-latitude").val(results[0].geometry.location.jb);
+      $("#form-longitude").val(results[0].geometry.location.kb);
 
     } else {
       alert('Geocode was not successful for the following reason: ' + status);

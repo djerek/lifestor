@@ -19,10 +19,10 @@
   <input type="button" value="pick this place" onclick="formAddress()">
 
   <div><%= f.label :latitude %><br />
-  <%= f.text_field :latitude, :id => "form-latitude" %></div>
+  <%= f.text_field :latitude, :readonly => true, :id => "form-latitude" %></div>
 
   <div><%= f.label :longitude %><br />
-  <%= f.text_field :longitude, :id => "form-longitude" %></div>
+  <%= f.text_field :longitude, :readonly => true, :id => "form-longitude" %></div>
 
   <div><%= f.submit "Sign up" %></div>
 <% end %>
