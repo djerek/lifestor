@@ -1,4 +1,4 @@
-<%= simple_form_for @entry, :remote => true do |f| %>
+<%= simple_form_for @entry do |f| %>
   <% if @entry.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@entry.errors.count, "error") %> prohibited this chessgame from being saved:</h2>
@@ -25,9 +25,11 @@
     <%= f.input :title %>
   </p>
 
-  <%= fields_for :questions do |builder| %>
-    <%= render 'questions/form', f: builder %>
+<% @entry.answers.each do |answer| %> 
+  <%= f.fields_for :answers, answer do |answer_fields| %>
+    <%= render partial: "answer_form", locals: {answer_fields: answer_fields, answer: answer} %>
   <% end %>
+<% end %>
 
   <p>
     <%= f.input :message %>
@@ -40,4 +42,4 @@
   <%= f.hidden_field :message_type, value: 'reflection' %>
 
   <p><%= f.submit %></p>
-<% end %>
+<% end %>}

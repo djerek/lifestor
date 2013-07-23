@@ -12,10 +12,16 @@ class EntriesController < ApplicationController
 
   def new
     @entry = Entry.new
+    @questions = Question.all.select {|q| q.is_active }
+    @questions.each do |q|
+      @entry.answers.build(question: q)
+    end
   end
 
   def create
     @entry = Entry.new(entry_params)
+    @entry.user = current_user
+    
     if @entry.save
       redirect_to @entry, :notice => "Successfully created entry."
     else
@@ -59,7 +65,7 @@ class EntriesController < ApplicationController
     def entry_params
       params.require(:entry).permit(:message_type, :title, :message, :image, 
         :remote_image_url, :latitude, :longitude, :tag_list, :written_on, 
-        questions_attributes: [:content], answers_attributes: [:content])
+        answers_attributes: [:content, :question_id])
       # :tag_tokens
     end
 end
