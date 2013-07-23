@@ -1,33 +1,26 @@
-<%= simple_form_for Entry.new do |f| %>
-  <% if @entry.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@entry.errors.count, "error") %> prohibited this entry from being saved:</h2>
-
-      <ul>
-      <% @entry.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-  <%= f.hidden_field :type, value: 'snapshot' %>
-  
+<%= simple_form_for @entry, :html => {multipart: true} do |f| %>  
   <p>
-    <%= f.label :image %><br />
     <%= f.input :image %>
   </p>
 
   <p>
-    <%= f.label :title %><br />
+    <%= f.label :written_on %>
+    <%= f.text_field :written_on %>
+  </p>
+
+  <p>
+    <%= f.label :remote_image_url, "or image URL" %>
+    <%= f.input :remote_image_url %>
+  </p>
+
+  <p>
     <%= f.input :title %>
   </p>
   <p>
-    <%= f.label :message %><br />
     <%= f.input :message, as: :text %>
   </p>
 
   <p>
-    <%= f.label :tag_list, "Tags (separate with a comma)" %>
     <%= f.input :tag_list, 
                 :id => "entry_tags", 
                 "data-pre" => @entry.tags.map(&:attributes).to_json %>
@@ -37,6 +30,5 @@
   <%= f.hidden_field :latitude, value: params[:latitude] %>
   <%= f.hidden_field :longitude, value: params[:longitude] %>
 
-  
   <p><%= f.submit %></p>
 <% end %>

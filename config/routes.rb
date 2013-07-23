@@ -1,5 +1,7 @@
 Project2::Application.routes.draw do  
   
+  resources :questions
+
   as :user do
     get "login" => "devise/sessions#new", :as => :new_user_session
     post 'login' => 'devise/sessions#create', :as => :user_session

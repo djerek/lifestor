@@ -1,6 +1,9 @@
 class EntriesController < ApplicationController
   def index
-    @entries = Entry.search(params[:search])
+    # I think we may actually want all entries to show up by default, with search as an add-on
+    @entries = Entry.all
+    # @entries = Entry.search(params[:search])
+    @entries_by_date = @entries.group_by(&:written_on)
   end
 
   def show
@@ -54,6 +57,9 @@ class EntriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def entry_params
-      params.require(:entry).permit(:message_type, :title, :message, :image, :latitude, :longitude, :tag_list, :tag_tokens)
+      params.require(:entry).permit(:message_type, :title, :message, :image, 
+        :remote_image_url, :latitude, :longitude, :tag_list, :written_on, 
+        questions_attributes: [:content], answers_attributes: [:content])
+      # :tag_tokens
     end
 end

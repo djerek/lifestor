@@ -19,7 +19,6 @@
 
 Time.zone = "US/Eastern"
 
-every 1.day, :at => Time.zone.parse('4:50pm').utc do
-  runner "UserMailer.welcome_email(@user).deliver"
-  command 'echo hello'
+every 1.day, :at => Time.zone.parse('11:36am').utc do
+  runner "UserMailer.reflection_email(User.find(2)).deliver"
 end

@@ -32,6 +32,7 @@ gem 'devise', '3.0.0.rc'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 
 gem 'gon'
 
@@ -51,6 +52,11 @@ end
 # Add new users
 
 gem 'faker', '1.1.2'
+
+# Upload photos!
+
+gem 'carrierwave'
+# gem 'rmagick' (seems a little old, makes thumbnails)
 
 # Time triggers
 
@@ -80,6 +86,17 @@ end
 # Create better scaffolds
   gem "nifty-generators"
 
+# Helps build surveys
+  gem 'surveyor'
+  gem 'haml'
+  gem 'fastercsv'
+  gem 'fuelux-rails'
+  gem 'formtastic', '~> 1.2.4'
+
+# Attempt at different calendar style
+  # gem 'fullcalendar-rails'
+  # gem 'jquery-rest-rails'
+
 group :development, :test do
   gem 'rspec-rails', '~> 2.0'
   gem "factory_girl_rails", "~> 4.0"
@@ -90,6 +107,11 @@ group :test do
   gem 'capybara'
   gem 'guard-rspec'
   gem 'launchy'
+end
+
+group :production do
+  gem 'pg'
+  gem 'rails_12factor'
 end
 
 # Use ActiveModel has_secure_password

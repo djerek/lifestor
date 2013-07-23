@@ -11,7 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130718173626) do
+ActiveRecord::Schema.define(version: 20130723182506) do
+
+  create_table "answers", force: true do |t|
+    t.text     "content"
+    t.integer  "user_id"
+    t.integer  "question_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "entry_id"
+  end
+
+  add_index "answers", ["question_id"], name: "index_answers_on_question_id"
+  add_index "answers", ["user_id"], name: "index_answers_on_user_id"
 
   create_table "entries", force: true do |t|
     t.string   "title"
@@ -23,6 +35,7 @@ ActiveRecord::Schema.define(version: 20130718173626) do
     t.integer  "user_id"
     t.float    "latitude"
     t.float    "longitude"
+    t.string   "written_on"
   end
 
   add_index "entries", ["user_id"], name: "index_entries_on_user_id"
@@ -33,6 +46,13 @@ ActiveRecord::Schema.define(version: 20130718173626) do
     t.float    "longitude"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "questions", force: true do |t|
+    t.string   "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "is_active"
   end
 
   create_table "taggings", force: true do |t|
@@ -69,6 +89,7 @@ ActiveRecord::Schema.define(version: 20130718173626) do
     t.string   "last_name"
     t.float    "latitude"
     t.float    "longitude"
+    t.string   "time_zone"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
