@@ -4,7 +4,7 @@ Longitude is <%= @long %><br>
 <%= form_for Entry.new do |f| %>
   <% if @entry.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@entry.errors.count, "error") %> prohibited this chessgame from being saved:</h2>
+      <h2><%= pluralize(@entry.errors.count, "error") %> prohibited this entry from being saved:</h2>
 
       <ul>
       <% @entry.errors.full_messages.each do |msg| %>
@@ -33,8 +33,10 @@ Longitude is <%= @long %><br>
 <div id="place-results"></div>
   <p>
     <%= f.label :address %><br />
-    <%= f.text_field :address, value: params[:address] %>
-    <input type="button" value="pick this address" onclick="formAddress()">
+
+    <%= f.text_field :address, value: params[:address], :id => "form-address" %>
+    <input type="button" value="pick this place" onclick="formAddress()">
+
     <input type="button" value="use current location" onclick="formCurrentLocation()">
   </p>
 
@@ -51,12 +53,12 @@ Longitude is <%= @long %><br>
 
    <p>
     <%= f.label :latitude %><br />
-    <%= f.text_field :latitude, value: params[:latitude], :readonly => true %>
+    <%= f.text_field :latitude, value: params[:latitude], :readonly => true, :id => "form-latitude" %>
   </p>
 
   <p>
     <%= f.label :longitude %><br />
-    <%= f.text_field :longitude, value: params[:longitude], :readonly => true %>
+    <%= f.text_field :longitude, value: params[:longitude], :readonly => true, :id => "form-longitude" %>
   </p>
 
   <%= check_box_tag(:current_location) %>

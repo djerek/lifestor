@@ -1,5 +1,6 @@
 
-// alert(gon.entries)
+// alert(gon.locations)
+// alert(gon.location_entries_array.length)
 
 /**
  * The HomeControl adds a control to the map that
@@ -123,16 +124,11 @@ function initialize() {
       
       // Current User Home Address is turned into lat and long
 
-      var address = gon.current_user.address;
+
 // console.log(address)
-  geocoder.geocode( { 'address': address}, function(results, status) {
-    if (status == google.maps.GeocoderStatus.OK) {
-      addressLatitude = results[0].geometry.location.jb
-      addressLongitude = results[0].geometry.location.kb
-    } else {
-      alert('Geocode was not successful for the following reason: ' + status);
-    }
-  });
+
+      addressLatitude = gon.current_user.latitude
+      addressLongitude = gon.current_user.longitude
 
 
       // Create the DIV to hold the control and
@@ -153,7 +149,7 @@ function initialize() {
     handleNoGeolocation(false);
   }
 
-  $.each(gon.entries, markerAtLocations);
+  $.each(gon.location_entries_array, markerAtLocations);
 
 }
 // this returns a list of places and puts markers on them
@@ -201,17 +197,34 @@ function callback(results, status) {
 
 // }
 
-function markerAtLocations(index, entry) {
-  var pos = new google.maps.LatLng(entry.latitude, entry.longitude)
+function markerAtLocations(index, array) {
+  // alert(array[0].latitude)
+
+  var pos = new google.maps.LatLng(array[0].latitude, array[0].longitude)
+  // alert("hi " + location.address)
 
   var marker = new google.maps.Marker({
     map: map,
     position: pos
   });
-  console.log(entry)
+  console.log("location:")
+  console.log(location)
 
-  var contentString = "<a href='" + $('#new_entry_path').data('path') + "&latitude=" + marker.position.jb + "&longitude=" + marker.position.kb + "'>add another entry to this location?</a>" + "     title: " + entry.title + "<br>message: " + entry.message 
-    + "<br>latitude: " + entry.latitude + "<br>longitude: " + entry.longitude
+
+
+  var contentString = "<a href='" + $('#new_entry_path').data('path') + "&latitude=" + marker.position.jb + "&longitude=" + marker.position.kb + "'>add another entry to this location?</a>" 
+    + "<br>title: " + array[0].title 
+    + "<br>latitude: " + array[0].latitude + "<br>longitude: " + array[0].longitude
+
+  for (var i = 1; i < array.length; i++) {
+    contentString = contentString + "<br>Entry " + i + " title: " + array[i].title
+      + "<br>message: " + array[i].message
+  }
+
+
+
+  // var contentString;
+  // for
 
   var infowindow = null;
 
@@ -229,8 +242,41 @@ function markerAtLocations(index, entry) {
       console.log("opening");
     }
   });
-
 }
+
+
+
+// function markerAtLocations(index, entry) {
+//   var pos = new google.maps.LatLng(entry.latitude, entry.longitude)
+
+//   var marker = new google.maps.Marker({
+//     map: map,
+//     position: pos
+//   });
+//   console.log(entry)
+
+//   var contentString = "<a href='" + $('#new_entry_path').data('path') + "&latitude=" + marker.position.jb + "&longitude=" + marker.position.kb + "'>add another entry to this location?</a>" 
+//   + "<br>title: " + entry.title + "<br>message: " + entry.message 
+//     + "<br>latitude: " + entry.latitude + "<br>longitude: " + entry.longitude
+
+//   var infowindow = null;
+
+//   google.maps.event.addListener(marker, 'click', function() {
+//     if (infowindow) {
+//       infowindow.close();
+//       infowindow = null;
+//       console.log("closing");
+//     }
+//     else {
+//       infowindow = new google.maps.InfoWindow({
+//         content: contentString
+//       });
+//       infowindow.open(map,marker);
+//       console.log("opening");
+//     }
+//   });
+
+// }
 
 function handleNoGeolocation(errorFlag) {
   if (errorFlag) {
