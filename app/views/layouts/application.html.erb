@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Project2</title>
+  <title><%= full_title(yield(:title)) %></title>
   <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
   <%= include_gon %>
-  <%= stylesheet_link_tag    "application", media: "all"%>
-  <%= javascript_include_tag "application"%>
+  <%= stylesheet_link_tag "application", "token-input", media: "all" %>
+  <%= javascript_include_tag "application", "jquery.tokeninput" %>
   <%= csrf_meta_tags %>
   <style type="text/css">
     html { height: 100% }
@@ -20,10 +20,8 @@
   </script>
 
   <script type="text/javascript">
-    // stuff went here
     google.maps.event.addDomListener(window, 'load', initialize);
   </script>
-
 </head>
 
 <body>
@@ -32,6 +30,7 @@
   <% if user_signed_in? %>
     <p>You are <%= current_user.email %>
     <%= link_to "Logout", destroy_user_session_path %></p>
+    <%= link_to "Destroy Account", user_path(current_user), method: :delete, data: { confirm: "You sure?" } %>
   <% else %>
     <%= link_to "Sign in", new_user_session_path %> or <%= link_to "sign up", new_user_registration_path %>
   <% end %>

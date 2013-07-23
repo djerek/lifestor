@@ -1,4 +1,4 @@
-<%= form_for @entry, :remote => true do |f| %>
+<%= simple_form_for @entry do |f| %>
   <% if @entry.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@entry.errors.count, "error") %> prohibited this chessgame from being saved:</h2>
@@ -10,21 +10,36 @@
       </ul>
     </div>
   <% end %>
+
+  <p>
+    <%= "Time for your daily reflection! Is this a free-writing section, or would you like to be interviewed?" %>
+  </p>
+  <p>
+    <%= "Put the free-writing button here" %>
+  </p>
+  <p>
+    <%= "Put the interview button here -- and note that these could be two separate form types, and that interviews could belong to happenings as well as reflections.   We should also probably ask whether they've had a good day or not, and help them make things better if it wasn't a good day." %>
+  </p>
  
   <p>
-    <%= f.label :title %><br />
-    <%= f.text_field :title %>
+    <%= f.input :title %>
   </p>
+
+<% @entry.answers.each do |answer| %> 
+  <%= f.fields_for :answers, answer do |answer_fields| %>
+    <%= render partial: "answer_form", locals: {answer_fields: answer_fields, answer: answer} %>
+  <% end %>
+<% end %>
+
   <p>
-    <%= f.label :message %><br />
-    <%= f.text_field :message %>
+    <%= f.input :message %>
   </p>
+
    <p>
-    <%= f.label :image %><br />
-    <%= f.text_field :image %>
+    <%= f.input :image %>
   </p>
   
   <%= f.hidden_field :message_type, value: 'reflection' %>
 
   <p><%= f.submit %></p>
-<% end %>
+<% end %>}

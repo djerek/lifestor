@@ -1,6 +1,11 @@
-<%= @huh %><br>
+<%= simple_form_for @entry, :html => {multipart: true} do |f| %>  
+  <p>
+    <%= f.input :image %>
+  </p>
+
 Latitude is <%= @lat %><br>
 Longitude is <%= @long %><br>
+
 <%= form_for Entry.new do |f| %>
   <% if @entry.errors.any? %>
     <div id="error_explanation">
@@ -16,18 +21,36 @@ Longitude is <%= @long %><br>
 
 
   <%= f.hidden_field :type, value: 'snapshot' %>
+>>>>>>> 9eed3b233183bb17ab98cd9972efcab43c1e0ec6
   <p>
-    <%= f.label :title %><br />
-    <%= f.text_field :title %>
+    <%= f.label :written_on %>
+    <%= f.text_field :written_on %>
   </p>
+
   <p>
-    <%= f.label :message %><br />
-    <%= f.text_field :message %>
+    <%= f.label :remote_image_url, "or image URL" %>
+    <%= f.input :remote_image_url %>
   </p>
+
+  <p>
+    <%= f.input :title %>
+  </p>
+
   <p>
     <%= f.label :image %><br />
     <%= f.text_field :image %>
   </p>
+
+  <p>
+    <%= f.input :message, as: :text %>
+  </p>
+
+  <p>
+    <%= f.input :tag_list, 
+                :id => "entry_tags", 
+                "data-pre" => @entry.tags.map(&:attributes).to_json %>
+  </p>
+
   <%= f.hidden_field :message_type, value: 'snapshot' %>
 
 <div id="place-results"></div>
@@ -68,11 +91,7 @@ Longitude is <%= @long %><br>
     <%= link_to "use current_location", locations_current_location_path, remote: true %>
   </div>
 
-  <br>
-
   <div id="map-canvas" style="width: 0px; height: 0px; margin: 0px; margin-bottom: 0px;"></div>
 
-
-  
   <p><%= f.submit %></p>
 <% end %>
