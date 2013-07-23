@@ -1,5 +1,6 @@
 function pickPlace() {
 
+
     // defines request terms
     var centerPlace;
     if (!$('#placelat').data('latitude')) 
@@ -13,11 +14,14 @@ function pickPlace() {
                                          position.coords.longitude);
 
         console.log("centerplace current location" + centerPlace)
+        nearPlace(centerPlace)
+        
         
       }, function() {
         handleNoGeolocation(true);
+
       });
-      nearPlace
+      
 
         // } else {
         // Browser doesn't support Geolocation
@@ -29,13 +33,13 @@ function pickPlace() {
     {
       centerPlace = new google.maps.LatLng($('#placelat').data('latitude'), $('#placelong').data('longitude'));
       console.log("centerplace after click" + centerPlace)
-      nearPlace
+      nearPlace(centerPlace)
 
     } 
 
 }
-function nearPlace() {
-    console.log("iiii " + centerPlace)
+function nearPlace(centerPlace) {
+    console.log("iiii ")
     var request = {
       location: centerPlace,
       radius: 80,
