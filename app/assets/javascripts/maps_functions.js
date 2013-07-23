@@ -57,12 +57,10 @@ function pickPlace() {
                                          position.coords.longitude);
 
         console.log("centerplace current location" + centerPlace)
+        console.log(map)
         nearPlace(centerPlace)
-        
-        
       }, function() {
         handleNoGeolocation(true);
-
       });
       
 
@@ -82,7 +80,7 @@ function pickPlace() {
 
 }
 function nearPlace(centerPlace) {
-    console.log("iiii ")
+    console.log("iiii " + centerPlace)
     var request = {
       location: centerPlace,
       radius: 80,
@@ -167,7 +165,7 @@ function formPlace(place) {
 function formAddress() {
 
   // get what's typed in address input form
-  var address = document.getElementById('form-address').value;
+  var address = document.getElementById('entry_address').value;
 
   geocoder.geocode( { 'address': address}, function(results, status) {
 
@@ -182,8 +180,8 @@ function formAddress() {
       console.log("longitude!:")
       console.log(longitude)
 
-      $("#form-latitude").val(results[0].geometry.location.jb);
-      $("#form-longitude").val(results[0].geometry.location.kb);
+      $("#entry_latitude").val(results[0].geometry.location.jb);
+      $("#entry_longitude").val(results[0].geometry.location.kb);
 
     } else {
       alert('Geocode was not successful for the following reason: ' + status);
