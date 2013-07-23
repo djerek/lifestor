@@ -16,13 +16,33 @@ class EntriesController < ApplicationController
     @questions.each do |q|
       @entry.answers.build(question: q)
     end
+
+    @lat = params[:latitude]
+    @long = params[:longitude]
   end
 
   def create
     @entry = Entry.new(entry_params)
     @entry.user = current_user
-    
+
+    if !@entry.location
+      # no location id given
+      # raise "no location given".to_yaml
+      location = Location.new
+      location.latitude = @entry.latitude
+      location.longitude = @entry.longitude
+      location.address = @entry.address
+      location.title = @entry.title
+      location.user = current_user
+      @entry.location = location
+    elsif @entry.location.user != current_user
+      raise "what".to_yaml
+    end
+
+    @entry.user = current_user
+
     if @entry.save
+      location.save
       redirect_to @entry, :notice => "Successfully created entry."
     else
       render :action => 'new'
@@ -64,7 +84,7 @@ class EntriesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def entry_params
       params.require(:entry).permit(:message_type, :title, :message, :image, 
-        :remote_image_url, :latitude, :longitude, :tag_list, :written_on, 
+        :remote_image_url, :latitude, :longitude, :tag_list, :written_on, :user_id,
         answers_attributes: [:content, :question_id])
       # :tag_tokens
     end

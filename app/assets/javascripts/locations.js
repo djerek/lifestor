@@ -1,4 +1,34 @@
-// alert(gon.entries)
+
+function whereAreYou(markerSpot, nearPlaceAlert){
+  if(navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+    var whereAreYouPos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+    whereAreYouPosLat = whereAreYouPos.jb
+    whereAreYouPosLong = whereAreYouPos.kb
+    markerSpotLat = markerSpot.position.jb
+    markerSpotLong = markerSpot.position.kb
+    markerSpotLatHigh = (markerSpotLat + .0005)
+    markerSpotLatLow = (markerSpotLat - .0005)
+    markerSpotLongHigh = (markerSpotLong + .0005)
+    markerSpotLongLow = (markerSpotLong - .0005)
+    console.log('markerspotlathigh' + markerSpotLatHigh + 'whereareyoupostlat' + whereAreYouPosLat)
+      if((markerSpotLatHigh >= whereAreYouPosLat) && (markerSpotLatLow <= whereAreYouPosLat) && (markerSpotLongHigh >= whereAreYouPosLong) && (markerSpotLongLow <= whereAreYouPosLong)) {
+        console.log(markerSpot)
+        alert(nearPlaceAlert)
+      }
+      }, function() {
+      handleNoGeolocation(true);
+    });
+  } 
+  else
+  {
+
+    // Browser doesn't support Geolocation
+    handleNoGeolocation(false);
+  }
+}
+// alert(gon.locations)
+// alert(gon.location_entries_array.length)
 
 /**
  * The HomeControl adds a control to the map that
@@ -58,8 +88,8 @@ function HomeControl(controlDiv, map, home) {
   // simply set the map to the control's current home property.
   google.maps.event.addDomListener(goHomeUI, 'click', function() {
     var currentHome = control.getHome();
-    currentHome.jb = gon.current_user.latitude
-    currentHome.kb = gon.current_user.longitude
+    currentHome.jb = addressLatitude
+    currentHome.kb = addressLongitude
     console.log(currentHome);
     map.setCenter(currentHome);
   });
@@ -71,11 +101,15 @@ function HomeControl(controlDiv, map, home) {
 
 ///////////////////
 
+var geocoder;
 var map;
+var infowindow;
 
 function initialize() {
+
+  geocoder = new google.maps.Geocoder();
   var mapOptions = {
-    zoom: 8,
+    zoom: 18,
     mapTypeId: google.maps.MapTypeId.HYBRID
   };
   map = new google.maps.Map(document.getElementById("map-canvas"),
@@ -91,11 +125,49 @@ function initialize() {
       var pos = new google.maps.LatLng(position.coords.latitude,
                                        position.coords.longitude);
 
+      var currentLocationWindow = "<a href='" + $('#new_entry_path').data('path') 
+      + "&latitude=" + pos.jb 
+      + "&longitude=" + pos.kb 
+      +  "'>Make entry at current location</a>"
+// sets request to ask for stores, bars, ... near the location
+//     var request = {
+//     location: pos,
+//     radius: 80,
+//     types: ['store','bar', 'bank', 'casino', 'park']
+//   };
+// // actually calls the request
+//    infowindowplace = new google.maps.InfoWindow();
+//   var service = new google.maps.places.PlacesService(map);
+//   service.nearbySearch(request, callback);
+
       var infowindow = new google.maps.InfoWindow({
         map: map,
         position: pos,
-        content: 'click on the map to add a marker'
+
+        content: currentLocationWindow + '<br>click on the map to add a marker'
+          + "<br>current latitude: " + position.coords.latitude
+          + "<br>current longitude: " + position.coords.longitude
       });
+
+      
+      // Current User Home Address is turned into lat and long
+
+
+// console.log(address)
+
+      addressLatitude = gon.current_user.latitude
+      addressLongitude = gon.current_user.longitude
+      console.log(pos.jb)
+      console.log(addressLatitude)
+      console.log(pos.kb)
+      console.log(addressLongitude)
+      if((pos.jb > addressLatitude - 0.001 ) && (pos.jb < addressLatitude + 0.001) && (pos.kb > addressLongitude - 0.001) && (pos.kb < addressLongitude + 0.001)) {
+        console.log("FINALLY")
+      }
+      else {
+        console.log("not finally")
+      }
+
 
       // Create the DIV to hold the control and
       // call the HomeControl() constructor passing
@@ -115,21 +187,92 @@ function initialize() {
     handleNoGeolocation(false);
   }
 
-  $.each(gon.entries, markerAtLocations);
+  $.each(gon.location_entries_array, markerAtLocations);
+
 
 }
+// this returns a list of places and puts markers on them
+function callback(results, status) {
+  if (status == google.maps.places.PlacesServiceStatus.OK) {
+    // var content ="";
+    for (var i = 0; i < results.length; i++) {
+      placeObject = results[i]
+      // content = content + placeObject.name + placeObject.vicinity;
+      $("#place-results").append('<li>' + placeObject.name + '</li>' + '<li>' + placeObject.vicinity + '</li>');
+      console.log("from callback" + placeObject.vicinity);
+    }
+  }
+}
 
-function markerAtLocations(index, entry) {
-  var pos = new google.maps.LatLng(entry.latitude, entry.longitude)
-  // alert(entry.latitude + "<--latitude, longitude-->" + entry.longitude)
+// function createMarker(place) {
+// // alert(place.name)
+//   var placeLoc = place.geometry.location;
+//   var marker = new google.maps.Marker({
+//     map: map,
+//     position: place.geometry.location
+//   });
+//   var reverselatlong = new google.maps.LatLng(marker.position.jb, marker.position.kb)
+//   console.log("reverselatlong" + reverselatlong)
+//   geocoder.geocode({'latLng': reverselatlong}, function(results, status) {
+//     if (status == google.maps.GeocoderStatus.OK) {
+//       if (results[1]) {
+//         reversegeocode = results[1].formatted_address
+//         console.log(reversegeocode)
+  
+
+//   google.maps.event.addListener(marker, 'click', function() {
+//     alert(place.name + reversegeocode)
+//     // infowindowplace.setContent(place.name + reversegeocode + "<a href='" + $('#new_entry_path').data('path') + "&latitude=" + marker.position.jb + "&longitude=" + marker.position.kb + "&address=" + reversegeocode + "&place=" + place.name + "'>testing</a>");
+//     // infowindowplace.open(map, this);
+//   });
+//       } else {
+//         alert('No results found');
+//       }
+//     } else {
+//       alert('Geocoder failed due to: ' + status);
+//     }
+//   });
+
+
+// }
+
+function markerAtLocations(index, array) {
+  // alert(array[0].latitude)
+
+  var pos = new google.maps.LatLng(array[0].latitude, array[0].longitude)
+  // alert("hi " + location.address)
+
   var marker = new google.maps.Marker({
     map: map,
     position: pos
   });
+  console.log("marker position in marker at locations" + marker.position)
+  markerSpot = marker
+  var contentString = "<a href='" + $('#new_entry_path').data('path') + "&latitude=" + marker.position.jb + "&longitude=" + marker.position.kb + "'>add another entry to this location?</a>" 
+    + "<br>title: " + array[0].title 
+    + "<br>latitude: " + array[0].latitude + "<br>longitude: " + array[0].longitude
 
-  var contentString = "title: " + entry.title + "<br>message: " + entry.message 
-    + "<br>latitude: " + entry.latitude + "<br>longitude: " + entry.longitude
+  for (var i = 1; i < array.length; i++) {
 
+    nearPlaceAlert = 'you made an entry near this spot, and you called it:' + array[i].title + 'and you said:' + array[i].message
+    whereAreYou(markerSpot, nearPlaceAlert)
+
+    contentString = contentString + "<br>Entry " + i + " title: " + array[i].title
+      + "<br>message: " + array[i].message
+  }
+  
+  
+
+
+
+  
+
+
+
+  // var contentString;
+  // for
+
+  // infowindow closes if you click on it again
   var infowindow = null;
 
   google.maps.event.addListener(marker, 'click', function() {
@@ -146,30 +289,8 @@ function markerAtLocations(index, entry) {
       console.log("opening");
     }
   });
-
 }
 
-function placeMarker(location) {
-  var marker = new google.maps.Marker({
-      position: location,
-      map: map
-  });
-
-  console.log(marker.position);
-  var contentString = "<a href='" + $('#new_entry_path').data('path') + "&latitude=" + marker.position.jb + "&longitude=" + marker.position.kb +  "'>Click to add</a>"
-
-  var infowindow = new google.maps.InfoWindow({
-    content: contentString
-  });
-
-  infowindow.open(map,marker);
-
-  google.maps.event.addListener(marker, 'click', function() {
-    infowindow.open(map,marker);
-  });
-
-  map.panTo(location);
-}
 
 function handleNoGeolocation(errorFlag) {
   if (errorFlag) {

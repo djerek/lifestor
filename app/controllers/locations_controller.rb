@@ -7,9 +7,65 @@ class LocationsController < ApplicationController
     end
   end
 
+  def current_location
+    respond_to do |format|
+      format.html { redirect_to :root }
+      format.js { render 'current_location' }
+    end
+  end
+
+  def get_close_locations(current_lat, current_long)
+    close_lats = Location.where(latitude: (current_lat - 0.3)..(current_lat + 0.3) )
+    close_longs = close_lats.where(longitude: (current_long - 0.3)..(current_long + 0.3) )
+    raise close_longs.to_yaml
+    
+
+    # respond_to do |format|
+    #   format.html { redirect_to :root }
+    #   format.js { render 'current_location' }
+    # end
+  end
+
   def showmap
-    gon.entries = Entry.all
+
+    # gon.close_to_here = []
+    # current_user.locations.each do |location|
+    #   temp = []
+    #   temp << location
+    #   temp << location.latitude
+    #   temp << location.longitude
+    #   gon.close_to_here << temp
+    # end
+    # raise gon.close_to_here[0].to_yaml
+
+
+    # get_close_locations(41, -73)
+    gon.entries = current_user.entries
+    gon.locations = current_user.locations
     gon.current_user = current_user
+
+
+    gon.location_entries_array = []
+    # raise current_user.locations.to_yaml
+
+    # for each location, make an array
+    # first value of array is location object, following are entry objects
+    current_user.locations.each do |location|
+      temp = []
+      temp << location
+
+      location.entries.each do |entry|
+        temp << entry
+      end
+
+      gon.location_entries_array << temp
+    end
+    # raise gon.location_entries_array[0].length.to_yaml
+
+    # gon.locations = []
+      
+
+
 
     respond_to do |format|
       format.html { }

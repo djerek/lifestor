@@ -3,6 +3,25 @@
     <%= f.input :image %>
   </p>
 
+Latitude is <%= @lat %><br>
+Longitude is <%= @long %><br>
+
+<%= form_for Entry.new do |f| %>
+  <% if @entry.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@entry.errors.count, "error") %> prohibited this entry from being saved:</h2>
+
+      <ul>
+      <% @entry.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <%= f.hidden_field :type, value: 'snapshot' %>
+>>>>>>> 9eed3b233183bb17ab98cd9972efcab43c1e0ec6
   <p>
     <%= f.label :written_on %>
     <%= f.text_field :written_on %>
@@ -16,6 +35,12 @@
   <p>
     <%= f.input :title %>
   </p>
+
+  <p>
+    <%= f.label :image %><br />
+    <%= f.text_field :image %>
+  </p>
+
   <p>
     <%= f.input :message, as: :text %>
   </p>
@@ -27,8 +52,46 @@
   </p>
 
   <%= f.hidden_field :message_type, value: 'snapshot' %>
-  <%= f.hidden_field :latitude, value: params[:latitude] %>
-  <%= f.hidden_field :longitude, value: params[:longitude] %>
+
+<div id="place-results"></div>
+  <p>
+    <%= f.label :address %><br />
+
+    <%= f.text_field :address, value: params[:address], :id => "form-address" %>
+    <input type="button" value="pick this place" onclick="formAddress()">
+
+    <input type="button" value="use current location" onclick="formCurrentLocation()">
+  </p>
+
+<%= content_tag "div", id: "placelat", data: {latitude: params[:latitude]} do %>
+  <% end %>
+
+  <%= content_tag "div", id: "placelong", data: {longitude: params[:longitude]} do %>
+  <% end %>
+  <p>
+    <%= f.label :place %><br />
+    <%= f.text_field :place %>
+    <input type="button" value="Show nearby places" onclick="pickPlace()">
+  </p>
+
+   <p>
+    <%= f.label :latitude %><br />
+    <%= f.text_field :latitude, value: params[:latitude], :readonly => true, :id => "form-latitude" %>
+  </p>
+
+  <p>
+    <%= f.label :longitude %><br />
+    <%= f.text_field :longitude, value: params[:longitude], :readonly => true, :id => "form-longitude" %>
+  </p>
+
+  <%= check_box_tag(:current_location) %>
+  <%= label_tag(:current_location, "use this location") %>
+
+  <div class="current-location">
+    <%= link_to "use current_location", locations_current_location_path, remote: true %>
+  </div>
+
+  <div id="map-canvas" style="width: 0px; height: 0px; margin: 0px; margin-bottom: 0px;"></div>
 
   <p><%= f.submit %></p>
 <% end %>

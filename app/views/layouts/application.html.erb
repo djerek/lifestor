@@ -4,16 +4,19 @@
   <title><%= full_title(yield(:title)) %></title>
   <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
   <%= include_gon %>
-  <%= stylesheet_link_tag "application", "token-input", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "jquery.tokeninput", "data-turbolinks-track" => true %>
+  <%= stylesheet_link_tag "application", "token-input", media: "all" %>
+  <%= javascript_include_tag "application", "jquery.tokeninput" %>
   <%= csrf_meta_tags %>
   <style type="text/css">
     html { height: 100% }
     body { height: 100%; margin: 0; padding: 0 }
-    #map-canvas { height: 100% }
+/*    #map-canvas { height: 100% }
+    #map-canvas img{max-width:none;}*/
   </style>
   <script type="text/javascript"
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBgz3JV4xG6PhM2cuSm_oAKyncf6WMR4xI&sensor=true">
+  </script>
+  <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=true">
   </script>
 
   <script type="text/javascript">

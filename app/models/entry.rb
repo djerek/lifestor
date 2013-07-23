@@ -3,6 +3,8 @@ class Entry < ActiveRecord::Base
   has_many :answers
   has_and_belongs_to_many :locations  
   accepts_nested_attributes_for :answers
+  has_many :tags
+  belongs_to :location
 
   acts_as_taggable_on :tags
   mount_uploader :image, ImageUploader
