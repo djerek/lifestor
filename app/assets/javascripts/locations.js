@@ -1,21 +1,3 @@
-function areYouHome(addressLatitude, addressLongitude){
-   if(navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function(position) {
-    var whereAreYouPos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-    homeSpotLat = addressLatitude
-    homeSpotLong = addressLongitude
-    console.log('homespotlat' + homeSpotLat)
-       }, function() {
-      handleNoGeolocation(true);
-    });
-  } 
-  else
-  {
-
-    // Browser doesn't support Geolocation
-    handleNoGeolocation(false);
-  }
-}
 
 function whereAreYou(markerSpot, nearPlaceAlert){
   if(navigator.geolocation) {
@@ -175,7 +157,16 @@ function initialize() {
 
       addressLatitude = gon.current_user.latitude
       addressLongitude = gon.current_user.longitude
-      areYouHome(addressLatitude, addressLongitude)
+      console.log(pos.jb)
+      console.log(addressLatitude)
+      console.log(pos.kb)
+      console.log(addressLongitude)
+      if((pos.jb > addressLatitude - 0.001 ) && (pos.jb < addressLatitude + 0.001) && (pos.kb > addressLongitude - 0.001) && (pos.kb < addressLongitude + 0.001)) {
+        console.log("FINALLY")
+      }
+      else {
+        console.log("not finally")
+      }
 
 
       // Create the DIV to hold the control and
