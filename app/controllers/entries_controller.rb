@@ -24,6 +24,7 @@ class EntriesController < ApplicationController
       location.latitude = @entry.latitude
       location.longitude = @entry.longitude
       location.address = @entry.address
+      location.title = @entry.title
       location.user = current_user
       @entry.location = location
     elsif @entry.location.user != current_user

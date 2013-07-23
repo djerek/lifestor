@@ -281,6 +281,7 @@ function markerAtLocations(index, array) {
   // var contentString;
   // for
 
+  // infowindow closes if you click on it again
   var infowindow = null;
 
   google.maps.event.addListener(marker, 'click', function() {
@@ -299,39 +300,6 @@ function markerAtLocations(index, array) {
   });
 }
 
-
-
-// function markerAtLocations(index, entry) {
-//   var pos = new google.maps.LatLng(entry.latitude, entry.longitude)
-
-//   var marker = new google.maps.Marker({
-//     map: map,
-//     position: pos
-//   });
-//   console.log(entry)
-
-//   var contentString = "<a href='" + $('#new_entry_path').data('path') + "&latitude=" + marker.position.jb + "&longitude=" + marker.position.kb + "'>add another entry to this location?</a>" 
-//   + "<br>title: " + entry.title + "<br>message: " + entry.message 
-//     + "<br>latitude: " + entry.latitude + "<br>longitude: " + entry.longitude
-
-//   var infowindow = null;
-
-//   google.maps.event.addListener(marker, 'click', function() {
-//     if (infowindow) {
-//       infowindow.close();
-//       infowindow = null;
-//       console.log("closing");
-//     }
-//     else {
-//       infowindow = new google.maps.InfoWindow({
-//         content: contentString
-//       });
-//       infowindow.open(map,marker);
-//       console.log("opening");
-//     }
-//   });
-
-// }
 
 function handleNoGeolocation(errorFlag) {
   if (errorFlag) {
