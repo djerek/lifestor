@@ -1,26 +1,8 @@
-function areYouHome(addressLatitude, addressLongitude){
-   if(navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function(position) {
-    var whereAreYouPos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-    homeSpotLat = addressLatitude
-    homeSpotLong = addressLongitude
-    console.log('homespotlat' + homeSpotLat)
-       }, function() {
-      handleNoGeolocation(true);
-    });
-  } 
-  else
-  {
-
-    // Browser doesn't support Geolocation
-    handleNoGeolocation(false);
-  }
-}
-
 function whereAreYou(markerSpot, nearPlaceAlert){
   if(navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
     var whereAreYouPos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+    console.log('markerSpot.position.jb' + markerSpot.position.jb)
     whereAreYouPosLat = whereAreYouPos.jb
     whereAreYouPosLong = whereAreYouPos.kb
     markerSpotLat = markerSpot.position.jb
@@ -175,6 +157,7 @@ function initialize() {
 
       addressLatitude = gon.current_user.latitude
       addressLongitude = gon.current_user.longitude
+      console.log('address latitude in initialize' + addressLatitude)
       areYouHome(addressLatitude, addressLongitude)
 
 
@@ -255,7 +238,7 @@ function markerAtLocations(index, array) {
     map: map,
     position: pos
   });
-  console.log("marker position in marker at locations" + marker.position)
+  // console.log("marker position in marker at locations" + marker.position)
   markerSpot = marker
   var contentString = "<a href='" + $('#new_entry_path').data('path') + "&latitude=" + marker.position.jb + "&longitude=" + marker.position.kb + "'>add another entry to this location?</a>" 
     + "<br>title: " + array[0].title 
@@ -264,7 +247,7 @@ function markerAtLocations(index, array) {
   for (var i = 1; i < array.length; i++) {
 
     nearPlaceAlert = 'you made an entry near this spot, and you called it:' + array[i].title + 'and you said:' + array[i].message
-    whereAreYou(markerSpot, nearPlaceAlert)
+    // whereAreYou(markerSpot, nearPlaceAlert)
 
     contentString = contentString + "<br>Entry " + i + " title: " + array[i].title
       + "<br>message: " + array[i].message
