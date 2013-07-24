@@ -5,7 +5,6 @@ gem 'rails',    github: 'rails/rails'
 gem 'arel',      github: 'rails/arel'
 
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
 
 gem 'twitter-bootstrap-rails'
 
@@ -98,6 +97,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 2.0'
   gem "factory_girl_rails", "~> 4.0"
   gem 'shoulda'
+  gem 'sqlite3'
 end
 
 group :test do

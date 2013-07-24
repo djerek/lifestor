@@ -14,7 +14,7 @@ GIT
 
 GIT
   remote: git://github.com/rails/rails.git
-  revision: 1c4eb13345a0c771aab2ee47aecdd4b24acce43a
+  revision: 3a4d0b1e2975122defe86de31fc35ab2dcd9b984
   specs:
     actionmailer (4.1.0.beta)
       actionpack (= 4.1.0.beta)
@@ -259,7 +259,7 @@ GEM
       libv8 (~> 3.11.8.12)
       ref
     thor (0.18.1)
-    thread_safe (0.1.0)
+    thread_safe (0.1.2)
       atomic
     tilt (1.4.1)
     treetop (1.4.14)
@@ -276,7 +276,7 @@ GEM
       multi_json (~> 1.0, >= 1.0.2)
     warden (1.2.3)
       rack (>= 1.0)
-    whenever (0.8.3)
+    whenever (0.8.4)
       activesupport (>= 2.3.4)
       chronic (>= 0.6.3)
     xpath (2.0.0)
