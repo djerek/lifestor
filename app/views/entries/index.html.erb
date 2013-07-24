@@ -2,8 +2,29 @@
 
 <%= form_tag entries_path, :method => 'get' do %>
 <p>
-  <%= text_field_tag :search, params[:search] %>
-  <%= submit_tag "Search", :name => nil %>
+  <%= text_field_tag :titlesearch, params[:titlesearch] %>
+  <%= submit_tag "Search by title", :name => nil %>
+</p>
+<% end %>
+
+<%= form_tag entries_path, :method => 'get' do %>
+<p>
+  <%= text_field_tag :messagesearch, params[:messagesearch] %>
+  <%= submit_tag "Search by message content", :name => nil %>
+</p>
+<% end %>
+
+<%= form_tag entries_path, :method => 'get' do %>
+<p>
+  <%= text_field_tag :writtenonsearch, params[:writtenonsearch] %>
+  <%= submit_tag "Search by date", :name => nil %>
+</p>
+<% end %>
+
+<%= form_tag entries_path, :method => 'get' do %>
+<p>
+  <%= text_field_tag :tagssearch, params[:tagssearch] %>
+  <%= submit_tag "Search by tags", :name => nil %>
 </p>
 <% end %>
 
@@ -11,16 +32,20 @@
   <tr>
     <th>Title</th>
     <th>Message</th>
-    <th>Image</th>
+    <th>Tags</th>
   </tr>
+  
   <% for entry in @entries %>
     <tr>
-      <td><%= entry.title %></td>
-      <td><%= entry.message %></td>
-      <td><%= entry.image %></td>
       <td><%= link_to "Show", entry %></td>
       <td><%= link_to "Edit", edit_entry_path(entry) %></td>
       <td><%= link_to "Destroy", entry, :confirm => 'Are you sure?', :method => :delete %></td>
+      <td><%= entry.title %></td>
+      <td><%= entry.message %></td>
+      <% entry.tags.each do |tag| %>
+      <td><%= tag.name %><td>
+      <% end %>
+      
     </tr>
   <% end %>
 </table>

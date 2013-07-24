@@ -11,13 +11,29 @@ class Entry < ActiveRecord::Base
 
   attr_reader :tag_list
 
-	def self.search(search)
-		if search
-			Entry.where('title LIKE ?', "%#{search}%")
+	def self.titlesearch(titlesearch)
+		if titlesearch
+			Entry.where('title LIKE ?', "%#{titlesearch}%").order(:title)
 		else
 			Entry.order(:title)
 		end
 	end
+
+  def self.messagesearch(messagesearch)
+      Entry.where('message LIKE ?', "%#{messagesearch}%").order(:title)
+  end
+
+  def self.writtenonsearch(writtenonsearch)
+      Entry.where('written_on LIKE ?', "%#{writtenonsearch}%").order(:written_on)
+  end
+
+
+
+  def self.tagssearch(tagssearch)
+      Entry.select('distinct entries.*').joins("LEFT JOIN taggings on entries.id = taggings.taggable_id").joins("LEFT JOIN tags on tags.id = taggings.tag_id").where('tags.name LIKE ?', "%#{tagssearch}%").order(:title)
+  end
+
+
 
   # def tag_list=(ids)
   #   # binding.pry

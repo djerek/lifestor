@@ -1,6 +1,6 @@
 jQuery ->
   $('#entry_written_on').datepicker
-    dateFormat: 'yy-mm-dd'
+    dateFormat: 'D, M d, yy'
     maxDate: 0
     setDate: new Date()
 
