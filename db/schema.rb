@@ -54,14 +54,10 @@ ActiveRecord::Schema.define(version: 20130723182506) do
     t.integer  "user_id"
   end
 
-  create_table "questions", force: true do |t|
-    t.string   "content"
-  end
-
   add_index "locations", ["user_id"], name: "index_locations_on_user_id"
 
-  create_table "tags", force: true do |t|
-    t.string   "title"
+  create_table "questions", force: true do |t|
+    t.string   "content"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "is_active"

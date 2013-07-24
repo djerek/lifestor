@@ -75,9 +75,6 @@ gem "better_errors"
 gem "pry"
 gem "binding_of_caller"
 
-# Add foreign keys easily
-gem 'foreigner'
-
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
@@ -87,11 +84,11 @@ end
   gem "nifty-generators"
 
 # Helps build surveys
-  gem 'surveyor'
-  gem 'haml'
-  gem 'fastercsv'
+  # gem 'surveyor'
+  # gem 'haml'
+  # gem 'fastercsv'
   gem 'fuelux-rails'
-  gem 'formtastic', '~> 1.2.4'
+  # gem 'formtastic', '~> 1.2.4'
 
 # Attempt at different calendar style
   # gem 'fullcalendar-rails'

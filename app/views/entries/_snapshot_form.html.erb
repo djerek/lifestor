@@ -6,22 +6,8 @@
 Latitude is <%= @lat %><br>
 Longitude is <%= @long %><br>
 
-<%= form_for Entry.new do |f| %>
-  <% if @entry.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@entry.errors.count, "error") %> prohibited this entry from being saved:</h2>
-
-      <ul>
-      <% @entry.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-
   <%= f.hidden_field :type, value: 'snapshot' %>
->>>>>>> 9eed3b233183bb17ab98cd9972efcab43c1e0ec6
+
   <p>
     <%= f.label :written_on %>
     <%= f.text_field :written_on %>
@@ -63,7 +49,7 @@ Longitude is <%= @long %><br>
     <input type="button" value="use current location" onclick="formCurrentLocation()">
   </p>
 
-<%= content_tag "div", id: "placelat", data: {latitude: params[:latitude]} do %>
+  <%= content_tag "div", id: "placelat", data: {latitude: params[:latitude]} do %>
   <% end %>
 
   <%= content_tag "div", id: "placelong", data: {longitude: params[:longitude]} do %>
