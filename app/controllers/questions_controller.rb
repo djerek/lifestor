@@ -30,10 +30,6 @@ class QuestionsController < ApplicationController
       if @question.save
         format.html { redirect_to @question, notice: 'Question was successfully created.' }
         format.json { render action: 'show', status: :created, location: @question }
-
-        # Add question to Active array if we want it showing up in the form
-        # Or Testing array if we want to test it (randomized for reflections)
-
       else
         format.html { render action: 'new' }
         format.json { render json: @question.errors, status: :unprocessable_entity }
@@ -73,6 +69,6 @@ class QuestionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def question_params
-      params.require(:question).permit(:content, answers_attributes: [:content])
+      params.require(:question).permit(:content, :is_active)
     end
 end

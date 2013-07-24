@@ -1,8 +1,8 @@
-
 function whereAreYou(markerSpot, nearPlaceAlert){
   if(navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
     var whereAreYouPos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+    console.log('markerSpot.position.jb' + markerSpot.position.jb)
     whereAreYouPosLat = whereAreYouPos.jb
     whereAreYouPosLong = whereAreYouPos.kb
     markerSpotLat = markerSpot.position.jb
@@ -14,7 +14,7 @@ function whereAreYou(markerSpot, nearPlaceAlert){
     console.log('markerspotlathigh' + markerSpotLatHigh + 'whereareyoupostlat' + whereAreYouPosLat)
       if((markerSpotLatHigh >= whereAreYouPosLat) && (markerSpotLatLow <= whereAreYouPosLat) && (markerSpotLongHigh >= whereAreYouPosLong) && (markerSpotLongLow <= whereAreYouPosLong)) {
         console.log(markerSpot)
-        alert(nearPlaceAlert)
+        $('#notice').append(nearPlaceAlert);
       }
       }, function() {
       handleNoGeolocation(true);
@@ -246,7 +246,7 @@ function markerAtLocations(index, array) {
     map: map,
     position: pos
   });
-  console.log("marker position in marker at locations" + marker.position)
+  // console.log("marker position in marker at locations" + marker.position)
   markerSpot = marker
   var contentString = "<a href='" + $('#new_entry_path').data('path') + "&latitude=" + marker.position.jb + "&longitude=" + marker.position.kb + "'>add another entry to this location?</a>" 
     + "<br>title: " + array[0].title 

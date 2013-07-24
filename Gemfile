@@ -87,11 +87,12 @@ end
 # Several interesting functions
   gem 'fuelux-rails'
 
-# Helps build surveys
+# Helps build surveys  
   # gem 'surveyor'
   # gem 'haml'
   # gem 'fastercsv'
-    # gem 'formtastic', '~> 1.2.4'
+
+  gem 'fuelux-rails'
 
 # Attempt at different calendar style
   # gem 'fullcalendar-rails'

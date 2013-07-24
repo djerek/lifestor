@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130723182506) do
+ActiveRecord::Schema.define(version: 20130724143938) do
 
   create_table "answers", force: true do |t|
     t.text     "content"
@@ -32,13 +32,13 @@ ActiveRecord::Schema.define(version: 20130723182506) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "message_type"
-    t.integer  "user_id"
     t.float    "latitude"
     t.float    "longitude"
     t.string   "address"
     t.string   "written_on"
     t.string   "place"
     t.integer  "location_id"
+    t.integer  "user_id"
   end
 
   add_index "entries", ["location_id"], name: "index_entries_on_location_id"

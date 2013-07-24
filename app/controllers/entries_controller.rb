@@ -43,7 +43,7 @@ class EntriesController < ApplicationController
 
     if @entry.save
       location.save
-      redirect_to @entry, :notice => "Successfully created entry."
+      redirect_to locations_showmap_path, :notice => "Successfully created entry."
     else
       render :action => 'new'
     end
