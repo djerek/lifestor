@@ -35,8 +35,8 @@ ActiveRecord::Schema.define(version: 20130723182506) do
     t.integer  "user_id"
     t.float    "latitude"
     t.float    "longitude"
-    t.string   "written_on"
     t.string   "address"
+    t.string   "written_on"
     t.string   "place"
     t.integer  "location_id"
   end
@@ -58,9 +58,9 @@ ActiveRecord::Schema.define(version: 20130723182506) do
 
   create_table "questions", force: true do |t|
     t.string   "content"
+    t.boolean  "is_active"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "is_active"
   end
 
   create_table "taggings", force: true do |t|
@@ -97,8 +97,8 @@ ActiveRecord::Schema.define(version: 20130723182506) do
     t.string   "last_name"
     t.float    "latitude"
     t.float    "longitude"
-    t.string   "time_zone"
     t.string   "address"
+    t.string   "time_zone"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
