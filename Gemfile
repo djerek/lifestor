@@ -61,7 +61,7 @@ gem 'carrierwave'
 
 # Time triggers
 
-gem 'whenever', :require => false
+gem 'whenever', require: false
 
 # Tagging app
 
@@ -84,15 +84,15 @@ end
 # Create better scaffolds
   gem "nifty-generators"
 
-# Helps build surveys
+# Several interesting functions
+  gem 'fuelux-rails'
 
-  
+# Helps build surveys  
   # gem 'surveyor'
   # gem 'haml'
   # gem 'fastercsv'
 
   gem 'fuelux-rails'
-  # gem 'formtastic', '~> 1.2.4'
 
 # Attempt at different calendar style
   # gem 'fullcalendar-rails'

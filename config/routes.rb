@@ -1,6 +1,7 @@
 Project2::Application.routes.draw do  
   get "cover/home"
   get "cover/help"
+  get "cover/welcome"
   get "static_pages/home"
   get "static_pages/help"
   get "locations/showmap"
