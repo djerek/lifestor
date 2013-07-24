@@ -13,9 +13,9 @@ class Entry < ActiveRecord::Base
 
 	def self.search(search)
 		if search
-			find(:all, :conditions => ['title LIKE ?', "%#{search}%"])
+			Entry.where('title LIKE ?', "%#{search}%")
 		else
-			# find(:all)
+			Entry.order(:title)
 		end
 	end
 

@@ -1,13 +1,46 @@
-<div id="calendar">
-  <%= calendar do |date| %>
-    <%= date.day %>
-    <% if @entries_by_date[date] %>
-       <ul>
-      <% @entries_by_date[date].each do |entry| %>
-        <li><%= link_to entry.message_type, entry %></li>
-      <% end %>
-    </ul>
-    <% end %>
+<h3>Entries</h3>
+
+<%= form_tag entries_path, :method => 'get' do %>
+<p>
+  <%= text_field_tag :search, params[:search] %>
+  <%= submit_tag "Search", :name => nil %>
+</p>
+<% end %>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Message</th>
+    <th>Image</th>
+  </tr>
+  <% for entry in @entries %>
+    <tr>
+      <td><%= entry.title %></td>
+      <td><%= entry.message %></td>
+      <td><%= entry.image %></td>
+      <td><%= link_to "Show", entry %></td>
+      <td><%= link_to "Edit", edit_entry_path(entry) %></td>
+      <td><%= link_to "Destroy", entry, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
   <% end %>
-</div>
+</table>
+
+
+
+
+<p><%= link_to "New Entry", new_entry_path %></p>
+
+
+<!-- <div id="calendar">
+  <%#= calendar do |date| %>
+    <%#= date.day %>
+    <%# if @entries_by_date[date] %>
+       <ul>
+      <%# @entries_by_date[date].each do |entry| %>
+        <li><%#= link_to entry.message_type, entry %></li>
+      <%# end %>
+    </ul>
+    <%# end %>
+  <%# end %>
+</div> -->
 

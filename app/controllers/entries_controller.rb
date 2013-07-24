@@ -1,9 +1,9 @@
 class EntriesController < ApplicationController
   def index
     # I think we may actually want all entries to show up by default, with search as an add-on
-    @entries = Entry.all
-    # @entries = Entry.search(params[:search])
-    @entries_by_date = @entries.group_by(&:written_on)
+    #@entries = Entry.all
+    @entries = Entry.search(params[:search])
+    #@entries_by_date = @entries.group_by(&:written_on)
   end
 
   def show
