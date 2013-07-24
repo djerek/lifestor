@@ -11,7 +11,7 @@ Project2::Application.routes.draw do
   devise_for :users, :skip => [:sessions]
   resources :users
 
-  root :to => "users#index"
+  root :to => "locations#showmap"
 
   as :user do
     get "login" => "devise/sessions#new", :as => :new_user_session

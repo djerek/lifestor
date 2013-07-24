@@ -14,7 +14,7 @@ function whereAreYou(markerSpot, nearPlaceAlert){
     console.log('markerspotlathigh' + markerSpotLatHigh + 'whereareyoupostlat' + whereAreYouPosLat)
       if((markerSpotLatHigh >= whereAreYouPosLat) && (markerSpotLatLow <= whereAreYouPosLat) && (markerSpotLongHigh >= whereAreYouPosLong) && (markerSpotLongLow <= whereAreYouPosLong)) {
         console.log(markerSpot)
-        alert(nearPlaceAlert)
+        $('#notice').append(nearPlaceAlert);
       }
       }, function() {
       handleNoGeolocation(true);
@@ -255,7 +255,7 @@ function markerAtLocations(index, array) {
   for (var i = 1; i < array.length; i++) {
 
     nearPlaceAlert = 'you made an entry near this spot, and you called it:' + array[i].title + 'and you said:' + array[i].message
-    // whereAreYou(markerSpot, nearPlaceAlert)
+    whereAreYou(markerSpot, nearPlaceAlert)
 
     contentString = contentString + "<br>Entry " + i + " title: " + array[i].title
       + "<br>message: " + array[i].message

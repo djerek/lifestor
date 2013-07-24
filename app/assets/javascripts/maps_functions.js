@@ -104,7 +104,7 @@ function placeMarker(location) {
   });
 
 
-  var contentString = "<a href='" + $('#new_entry_path').data('path') + "&latitude=" + marker.position.jb + "&longitude=" + marker.position.kb + "'>Click to add</a>"
+  var contentString = "<a href='" + $('#new_entry_path').data('path') + "&latitude=" + marker.position.jb + "&longitude=" + marker.position.kb + "'>Click here to create a snapshot at this location</a>"
 
   var infowindow = new google.maps.InfoWindow({
     content: contentString
@@ -133,7 +133,7 @@ function codeAddress() {
       });
 
 
-      var contentString = "<a href='" + $('#new_entry_path').data('path') + "&latitude=" + marker.position.jb + "&longitude=" + marker.position.kb + "&address=" + address + "'>Click to add</a>"
+      var contentString = "<a href='" + $('#new_entry_path').data('path') + "&latitude=" + marker.position.jb + "&longitude=" + marker.position.kb + "&address=" + address + "'>Click here to create a snapshot at this location</a>"
       var infowindow = new google.maps.InfoWindow({
         content: "address: " + address + "<br>" + contentString
       });
