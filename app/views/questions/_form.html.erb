@@ -1,12 +1,12 @@
-<% Question.all.each do |question| %>
-  <% if question.is_active == true %>
-  <% @question = question %>
+<%= simple_form_for(@question) do |f| %>
+  <%= f.error_notification %>
 
-    <fieldset>
-        <%= f.fields_for :answers do |builder| %>
-          <%= render 'answer_form', f: builder %>
-        <% end %> 
-    </fieldset>
+  <div class="inputs">
+    <%= f.input :content %>
+    <%= f.input :is_active %>
+  </div>
 
-  <% end %>
+  <div class="actions">
+    <%= f.button :submit %>
+  </div>
 <% end %>

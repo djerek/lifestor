@@ -87,7 +87,7 @@ end
   gem "nifty-generators"
 
 # Helps build surveys
-  gem 'surveyor'
+  #gem 'surveyor'
   gem 'haml'
   gem 'fastercsv'
   gem 'fuelux-rails'
