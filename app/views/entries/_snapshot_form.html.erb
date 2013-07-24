@@ -45,9 +45,13 @@ Longitude is <%= @long %><br>
 
   <%= content_tag "div", id: "placelong", data: {longitude: params[:longitude]} do %>
   <% end %>
+
+  <%= content_tag "div", id: "loc-token", data: {locationtokens: Location.where(id: params[:location_tokens]) } do %>
+  <% end %>
+
   <p>
-    <%= f.label :place %><br />
-    <%= f.text_field :place %>
+    <%= f.label :location_tokens, "Location" %><br />
+    <%= f.text_field :location_tokens %>
     <input type="button" value="Show nearby places" onclick="pickPlace()">
   </p>
 

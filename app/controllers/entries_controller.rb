@@ -15,26 +15,47 @@ class EntriesController < ApplicationController
   end
 
   def create
+    make_new_location = Location.where(id: entry_params[:location_tokens]).blank?
+
     @entry = Entry.new(entry_params)
 
-    if !@entry.location
-      # no location id given
-      # raise "no location given".to_yaml
-      location = Location.new
-      location.latitude = @entry.latitude
-      location.longitude = @entry.longitude
-      location.address = @entry.address
-      location.title = @entry.title
-      location.user = current_user
-      @entry.location = location
-    elsif @entry.location.user != current_user
-      raise "what".to_yaml
-    end
+    # if !@entry.location
+    #   # no location id given
+    #   # raise "no location given".to_yaml
+    #   location = Location.new
+    #   location.latitude = @entry.latitude
+    #   location.longitude = @entry.longitude
+    #   location.address = @entry.address
+    #   location.title = @entry.title
+    #   location.user = current_user
+    #   @entry.location = location
+    # elsif @entry.location.user != current_user
+    #   raise "what".to_yaml
+    # end
+    # @entry.location.id = location_tokens
+
+    # raise entry_params[:location_tokens].to_yaml
+
+    @entry.location_id = entry_params[:location_tokens]
+
+    # if making a new location: take lat and long and address
+    # if Location.where(id: @entry.location_id).blank?
+
 
     @entry.user = current_user
+    # raise @entry.location.id.to_yaml
     if @entry.save
-      location.save
-      redirect_to @entry, :notice => "Successfully created entry."
+
+      if make_new_location
+        loca = Location.where(id: @entry.location_id).take
+        loca.latitude = @entry.latitude
+        loca.longitude = @entry.longitude
+        loca.address = @entry.address
+        loca.user_id = current_user.id
+        loca.save
+      end
+
+      redirect_to locations_showmap_path, :notice => "Successfully created entry."
     else
       render :action => 'new'
     end
@@ -67,6 +88,6 @@ class EntriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def entry_params
-      params.require(:entry).permit(:place, :address, :message_type, :title, :message, :image, :latitude, :longitude, :user_id)
+      params.require(:entry).permit(:location_tokens, :place, :address, :message_type, :title, :message, :image, :latitude, :longitude, :user_id)
     end
 end

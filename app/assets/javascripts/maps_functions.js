@@ -201,8 +201,8 @@ function formCurrentLocation() {
       var latitude = position.coords.latitude;
       var longitude = position.coords.longitude;
 
-      $("#entry_latitude").val(latitude);
-      $("#entry_longitude").val(longitude);
+      $("#form-latitude").val(latitude);
+      $("#form-longitude").val(longitude);
 
     }, function() {
       handleNoGeolocation(true);
