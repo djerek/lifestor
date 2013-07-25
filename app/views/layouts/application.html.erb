@@ -49,6 +49,7 @@
 <body>
   <p class="notice"><%= notice %></p>
   <p class="alert"><%= alert %></p>
+<<<<<<< HEAD
   
 
 <%= link_to 'create snapshot', new_entry_path(:message_type => 'snapshot') %>
@@ -57,6 +58,13 @@
 
 
 
+=======
+  <% if user_signed_in? %>
+    <p>You are <%= current_user.email %>
+    <%= link_to "Logout", destroy_user_session_path %></p>
+    <%= link_to "Destroy Account", user_path(current_user), method: :delete, data: { confirm: "You sure?" } %>
+  <% end %>
+>>>>>>> 7961fd92351d9719bb30ce06ae64120e81da00b6
 
 <%= yield %>
 

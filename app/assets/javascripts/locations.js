@@ -7,14 +7,14 @@ function whereAreYou(markerSpot, nearPlaceAlert){
     whereAreYouPosLong = whereAreYouPos.kb
     markerSpotLat = markerSpot.position.jb
     markerSpotLong = markerSpot.position.kb
-    markerSpotLatHigh = (markerSpotLat + .0005)
-    markerSpotLatLow = (markerSpotLat - .0005)
-    markerSpotLongHigh = (markerSpotLong + .0005)
-    markerSpotLongLow = (markerSpotLong - .0005)
+    markerSpotLatHigh = (markerSpotLat + .005)
+    markerSpotLatLow = (markerSpotLat - .005)
+    markerSpotLongHigh = (markerSpotLong + .005)
+    markerSpotLongLow = (markerSpotLong - .005)
     console.log('markerspotlathigh' + markerSpotLatHigh + 'whereareyoupostlat' + whereAreYouPosLat)
       if((markerSpotLatHigh >= whereAreYouPosLat) && (markerSpotLatLow <= whereAreYouPosLat) && (markerSpotLongHigh >= whereAreYouPosLong) && (markerSpotLongLow <= whereAreYouPosLong)) {
         console.log(markerSpot)
-        $('#notice').append(nearPlaceAlert);
+        $('.notice').append(nearPlaceAlert);
       }
       }, function() {
       handleNoGeolocation(true);
@@ -106,6 +106,7 @@ var map;
 var infowindow;
 
 function initialize() {
+  hideStuffOnForm();
 
   geocoder = new google.maps.Geocoder();
   var mapOptions = {
@@ -162,7 +163,9 @@ function initialize() {
       console.log(pos.kb)
       console.log(addressLongitude)
       if((pos.jb > addressLatitude - 0.001 ) && (pos.jb < addressLatitude + 0.001) && (pos.kb > addressLongitude - 0.001) && (pos.kb < addressLongitude + 0.001)) {
-        console.log("FINALLY")
+        $('.notice').append("Finally you're home. " 
+          + "<a href='" + $('#new_entry_path').data('path') 
+          + "'>Make an entry?</a><br>")
       }
       else {
         console.log("not finally")
@@ -248,25 +251,31 @@ function markerAtLocations(index, array) {
   });
   // console.log("marker position in marker at locations" + marker.position)
   markerSpot = marker
-  var contentString = "<a href='" + $('#new_entry_path').data('path') + "&latitude=" + marker.position.jb + "&longitude=" + marker.position.kb + "'>add another entry to this location?</a>" 
+
+  var contentString = "<a href='" + $('#new_entry_path').data('path') 
+    + "&location_tokens=" + array[0].id
+    + "'>add another entry to this location?</a>" 
     + "<br>title: " + array[0].title 
     + "<br>latitude: " + array[0].latitude + "<br>longitude: " + array[0].longitude
 
+  var nearPlaceAlert = "You made an entry near this spot: " + array[0].title
+    + "<br>" + "<a href='" + $('#new_entry_path').data('path') 
+    + "&location_tokens=" + array[0].id
+    + "'>add another entry to this location?</a><br>"
+
   for (var i = 1; i < array.length; i++) {
 
-    nearPlaceAlert = 'you made an entry near this spot, and you called it:' + array[i].title + 'and you said:' + array[i].message
-    whereAreYou(markerSpot, nearPlaceAlert)
+    nearPlaceAlert = nearPlaceAlert + "   You said: " + array[i].message + "<br>"
+
 
     contentString = contentString + "<br>Entry " + i + " title: " + array[i].title
       + "<br>message: " + array[i].message
   }
+
+
+  whereAreYou(markerSpot, nearPlaceAlert)
   
   
-
-
-
-  
-
 
 
   // var contentString;
@@ -307,4 +316,17 @@ function handleNoGeolocation(errorFlag) {
 
   var infowindow = new google.maps.InfoWindow(options);
   map.setCenter(options.position);
+}
+
+// if has a location token, hide some stuff on form
+function hideStuffOnForm() {
+  if ($('#loc-token').data('locationtokens') == null || $('#loc-token').data('locationtokens') =="") {
+    console.log("no tokes!!")
+    console.log("uh" + $('#loc-token').data('locationtokens') + "uh")
+  }
+  else {
+    console.log("has tokens!!!!")
+    $('#snapshot-address').hide();
+    $("#entry_message").val("44");
+  }
 }

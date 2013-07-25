@@ -191,26 +191,41 @@ function formAddress() {
 
 // use current location on entry form
 function formCurrentLocation() {
-  // Try HTML5 geolocation
-  if(navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function(position) {
-      var pos = new google.maps.LatLng(position.coords.latitude,
-                                       position.coords.longitude);
-      
-      // set lat and long to current coordinates
-      var latitude = position.coords.latitude;
-      var longitude = position.coords.longitude;
+  console.log("currentlocation probs loading")
+  if (document.getElementById('currentlocationbutton').style.background != "orange") {
+    alert("it's not orange so getting current location");
 
-      $("#entry_latitude").val(latitude);
-      $("#entry_longitude").val(longitude);
+    // Try HTML5 geolocation
+    if(navigator.geolocation) {
+      console.log("currentlocation probs trying")
+      navigator.geolocation.getCurrentPosition(function(position) {
+        
+        // set lat and long to current coordinates
+        var latitude = position.coords.latitude;
+        var longitude = position.coords.longitude;
 
-    }, function() {
-      handleNoGeolocation(true);
-    });
+        $("#form-latitude").val(latitude);
+        $("#form-longitude").val(longitude);
+        
+        // $("#currentlocationbutton").background(color);
+        document.getElementById('currentlocationbutton').style.background="orange";
+        console.log("currentlocation probs done")
 
-  } else {
-    // Browser doesn't support Geolocation
-    handleNoGeolocation(false);
+
+      }, function() {
+        handleNoGeolocation(true);
+      });
+
+    } else {
+      // Browser doesn't support Geolocation
+      handleNoGeolocation(false);
+    }
+  }
+
+  // if it is orange, so getting rid of current location
+  else {
+    alert("it is orange and gonna be not orange");
+    document.getElementById('currentlocationbutton').style.background=null;
   }
 
 }

@@ -1,3 +1,60 @@
+<h3>Entries</h3>
+
+<%= form_tag entries_path, :method => 'get' do %>
+<p>
+  <%= text_field_tag :titlesearch, params[:titlesearch] %>
+  <%= submit_tag "Search by title", :name => nil %>
+</p>
+<% end %>
+
+<%= form_tag entries_path, :method => 'get' do %>
+<p>
+  <%= text_field_tag :messagesearch, params[:messagesearch] %>
+  <%= submit_tag "Search by message content", :name => nil %>
+</p>
+<% end %>
+
+<%= form_tag entries_path, :method => 'get' do %>
+<p>
+  <%= text_field_tag :writtenonsearch, params[:writtenonsearch] %>
+  <%= submit_tag "Search by date", :name => nil %>
+</p>
+<% end %>
+
+<%= form_tag entries_path, :method => 'get' do %>
+<p>
+  <%= text_field_tag :tagssearch, params[:tagssearch] %>
+  <%= submit_tag "Search by tags", :name => nil %>
+</p>
+<% end %>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Message</th>
+    <th>Tags</th>
+  </tr>
+  
+  <% for entry in @entries %>
+    <tr>
+      <td><%= entry.title %></td>
+      <td><%= entry.message %></td>
+      <td><% entry.tags.each do |tag| %>
+      <%= tag.name %><br />
+      <% end %><td>
+      <td><%= link_to "Show", entry %></td>
+      <td><%= link_to "Add to entry", edit_entry_path(entry) %></td>
+      <td><%= link_to "Destroy", entry, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+
+
+
+<p><%= link_to "New Entry", new_entry_path %></p>
+
+
 <div id="calendar">
   <%= calendar do |date| %>
     <%= date.day %>
