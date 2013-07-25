@@ -12,6 +12,7 @@ class EntriesController < ApplicationController
 
   def new
     @entry = Entry.new
+    @entry.user = current_user
     @questions = Question.all.select {|q| q.is_active }
     @questions.each do |q|
       @entry.answers.build(question: q)
@@ -38,8 +39,6 @@ class EntriesController < ApplicationController
     elsif @entry.location.user != current_user
       raise "what".to_yaml
     end
-
-    @entry.user = current_user
 
     if @entry.save
       location.save

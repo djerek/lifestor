@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130724143938) do
+ActiveRecord::Schema.define(version: 20130725181244) do
 
   create_table "answers", force: true do |t|
     t.text     "content"
@@ -19,11 +19,20 @@ ActiveRecord::Schema.define(version: 20130724143938) do
     t.integer  "question_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "entry_id"
   end
 
   add_index "answers", ["question_id"], name: "index_answers_on_question_id"
   add_index "answers", ["user_id"], name: "index_answers_on_user_id"
+
+  create_table "bios", force: true do |t|
+    t.string   "image"
+    t.text     "story"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+  end
+
+  add_index "bios", ["user_id"], name: "index_bios_on_user_id"
 
   create_table "entries", force: true do |t|
     t.string   "title"
@@ -99,6 +108,7 @@ ActiveRecord::Schema.define(version: 20130724143938) do
     t.float    "longitude"
     t.string   "address"
     t.string   "time_zone"
+    t.integer  "score"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

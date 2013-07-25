@@ -1,0 +1,18 @@
+<%= simple_form_for(@bio) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="inputs">
+    <%= f.input :image %>
+    <%= f.input :story %>
+  </div>
+
+<% @bio.answers.each do |answer| %> 
+  <%= f.fields_for :answers, answer do |answer_fields| %>
+    <%= render partial: "answer_form", locals: {answer_fields: answer_fields, answer: answer} %>
+  <% end %>
+<% end %>
+
+  <div class="actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

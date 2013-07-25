@@ -1,8 +1,9 @@
 class User < ActiveRecord::Base
+  has_many :bios, dependent: :destroy
   has_many :entries, dependent: :destroy
   has_many :locations, dependent: :destroy
   has_many :tags
-has_many :answers
+  has_many :answers
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable

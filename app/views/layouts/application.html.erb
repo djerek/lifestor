@@ -35,6 +35,10 @@
     <%= link_to "Sign in", new_user_session_path %> or <%= link_to "sign up", new_user_registration_path %>
   <% end %>
 
+<%= link_to 'create snapshot', new_entry_path(:message_type => 'snapshot') %>
+<%= link_to 'create happening', new_entry_path(:message_type => 'happening') %>
+<%= link_to 'create reflection', new_entry_path(:message_type => 'reflection') %>
+
 <%= yield %>
 
 <script type="text/javascript">
