@@ -19,35 +19,57 @@ class EntriesController < ApplicationController
     @entry = Entry.new
     @questions = Question.all.select {|q| q.is_active }
     @questions.each do |q|
-      @entry.answers.build(question: q)
+    @entry.answers.build(question: q)
     end
 
     @lat = params[:latitude]
     @long = params[:longitude]
+
   end
 
   def create
+    make_new_location = Location.where(id: entry_params[:location_tokens]).blank?
+
     @entry = Entry.new(entry_params)
     @entry.user = current_user
 
-    if !@entry.location
-      # no location id given
-      # raise "no location given".to_yaml
-      location = Location.new
-      location.latitude = @entry.latitude
-      location.longitude = @entry.longitude
-      location.address = @entry.address
-      location.title = @entry.title
-      location.user = current_user
-      @entry.location = location
-    elsif @entry.location.user != current_user
-      raise "what".to_yaml
-    end
+    # if !@entry.location
+    #   # no location id given
+    #   # raise "no location given".to_yaml
+    #   location = Location.new
+    #   location.latitude = @entry.latitude
+    #   location.longitude = @entry.longitude
+    #   location.address = @entry.address
+    #   location.title = @entry.title
+    #   location.user = current_user
+    #   @entry.location = location
+    # elsif @entry.location.user != current_user
+    #   raise "what".to_yaml
+    # end
+    # @entry.location.id = location_tokens
+
+    # raise entry_params[:location_tokens].to_yaml
+
+    @entry.location_id = entry_params[:location_tokens]
+
+    # if making a new location: take lat and long and address
+    # if Location.where(id: @entry.location_id).blank?
+
 
     @entry.user = current_user
 
+    # raise @entry.location.id.to_yaml
     if @entry.save
-      location.save
+
+      if make_new_location
+        loca = Location.where(id: @entry.location_id).take
+        loca.latitude = @entry.latitude
+        loca.longitude = @entry.longitude
+        loca.address = @entry.address
+        loca.user_id = current_user.id
+        loca.save
+      end
+
       redirect_to locations_showmap_path, :notice => "Successfully created entry."
     else
       render :action => 'new'
@@ -88,7 +110,7 @@ class EntriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def entry_params
-      params.require(:entry).permit(:message_type, :title, :message, :image, 
+      params.require(:entry).permit(:image, :place, :address, :location_tokens, :message_type, :title, :message, :image, 
         :remote_image_url, :latitude, :longitude, :tag_list, :written_on, :user_id,
         answers_attributes: [:content, :question_id])
       # :tag_tokens

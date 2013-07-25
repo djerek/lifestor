@@ -1,9 +1,9 @@
 class LocationsController < ApplicationController
   def index
-    @locations = Location.all
-      respond_to do |format|
-      format.html { }
-      format.js { render 'index' }
+    @locations = Location.where(user: current_user)
+    respond_to do |format|
+      format.html
+      format.json { render :json => @locations.tokens(params[:q]) }
     end
   end
 
@@ -54,7 +54,7 @@ class LocationsController < ApplicationController
       temp = []
       temp << location
 
-      location.entries.each do |entry|
+      location.entries.reverse.each do |entry|
         temp << entry
       end
 

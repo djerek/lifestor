@@ -9,7 +9,14 @@ class Entry < ActiveRecord::Base
   acts_as_taggable_on :tags
   mount_uploader :image, ImageUploader
 
+  attr_reader :location_tokens
   attr_reader :tag_list
+
+  def location_tokens=(tokens)
+    self.location_id = Location.ids_from_tokens(tokens)
+  end
+
+ 
 
 	def self.titlesearch(titlesearch)
 		if titlesearch
