@@ -6,13 +6,8 @@ class EntriesController < ApplicationController
     @entries = Entry.messagesearch(params[:messagesearch]) if params[:messagesearch].present?
     @entries = Entry.writtenonsearch(params[:writtenonsearch]) if params[:writtenonsearch].present?
     @entries = Entry.tagssearch(params[:tagssearch]) if params[:tagssearch].present?
+    @entries_by_date = @entries.group_by(&:written_on)
     #@names = @entry
-    @tag_array = []
-    @entries.each do |entry|
-      entry.tags.each do |tag|
-        @tag_array << tag
-      end
-    end
   end
 
   def show

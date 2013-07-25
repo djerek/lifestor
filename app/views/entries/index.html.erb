@@ -37,15 +37,14 @@
   
   <% for entry in @entries %>
     <tr>
-      <td><%= link_to "Show", entry %></td>
-      <td><%= link_to "Edit", edit_entry_path(entry) %></td>
-      <td><%= link_to "Destroy", entry, :confirm => 'Are you sure?', :method => :delete %></td>
       <td><%= entry.title %></td>
       <td><%= entry.message %></td>
-      <% entry.tags.each do |tag| %>
-      <td><%= tag.name %><td>
-      <% end %>
-      
+      <td><% entry.tags.each do |tag| %>
+      <%= tag.name %><br />
+      <% end %><td>
+      <td><%= link_to "Show", entry %></td>
+      <td><%= link_to "Add to entry", edit_entry_path(entry) %></td>
+      <td><%= link_to "Destroy", entry, :confirm => 'Are you sure?', :method => :delete %></td>
     </tr>
   <% end %>
 </table>
@@ -56,16 +55,16 @@
 <p><%= link_to "New Entry", new_entry_path %></p>
 
 
-<!-- <div id="calendar">
-  <%#= calendar do |date| %>
-    <%#= date.day %>
-    <%# if @entries_by_date[date] %>
+<div id="calendar">
+  <%= calendar do |date| %>
+    <%= date.day %>
+    <% if @entries_by_date[date] %>
        <ul>
-      <%# @entries_by_date[date].each do |entry| %>
-        <li><%#= link_to entry.message_type, entry %></li>
-      <%# end %>
+      <% @entries_by_date[date].each do |entry| %>
+        <li><%= link_to entry.message_type, entry %></li>
+      <% end %>
     </ul>
-    <%# end %>
-  <%# end %>
-</div> -->
+    <% end %>
+  <% end %>
+</div>
 
