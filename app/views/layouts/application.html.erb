@@ -31,8 +31,6 @@
     <p>You are <%= current_user.email %>
     <%= link_to "Logout", destroy_user_session_path %></p>
     <%= link_to "Destroy Account", user_path(current_user), method: :delete, data: { confirm: "You sure?" } %>
-  <% else %>
-    <%= link_to "Sign in", new_user_session_path %> or <%= link_to "sign up", new_user_registration_path %>
   <% end %>
 
 <%= yield %>

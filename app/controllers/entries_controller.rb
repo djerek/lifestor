@@ -2,10 +2,11 @@ class EntriesController < ApplicationController
   def index
     # I think we may actually want all entries to show up by default, with search as an add-on
     #@entries = Entry.all
-    @entries = Entry.titlesearch(params[:titlesearch])
-    @entries = Entry.messagesearch(params[:messagesearch]) if params[:messagesearch].present?
-    @entries = Entry.writtenonsearch(params[:writtenonsearch]) if params[:writtenonsearch].present?
-    @entries = Entry.tagssearch(params[:tagssearch]) if params[:tagssearch].present?
+    @current_entries = Entry.where(user: current_user)
+    @entries = @current_entries.titlesearch(params[:titlesearch])
+    @entries = @current_entries.messagesearch(params[:messagesearch]) if params[:messagesearch].present?
+    @entries = @current_entries.writtenonsearch(params[:writtenonsearch]) if params[:writtenonsearch].present?
+    @entries = @current_entries.tagssearch(params[:tagssearch]) if params[:tagssearch].present?
     @entries_by_date = @entries.group_by(&:written_on)
     #@names = @entry
   end
