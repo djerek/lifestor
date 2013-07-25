@@ -24,20 +24,39 @@
   </script>
 </head>
 
+<div class="navbar">
+  <div class="navbar-inner">
+    <a class="brand" href='root_path'>Logo Goes Here</a>
+    <ul class="nav">
+      <% if user_signed_in? %>
+      <li>
+      You are <%= current_user.email %>
+      </li>
+      <li>
+      <%= link_to "Logout", destroy_user_session_path %></li>
+      <li>
+      <%= link_to "Destroy Account", user_path(current_user), method: :delete, data: { confirm: "You don't want to do this. Please reconsider." } %>
+      </li>
+      <% else %>
+      <li>
+        <%= link_to "Sign in", new_user_session_path %> or <%= link_to "sign up", new_user_registration_path %>
+      </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
 <body>
   <p class="notice"><%= notice %></p>
   <p class="alert"><%= alert %></p>
-  <% if user_signed_in? %>
-    <p>You are <%= current_user.email %>
-    <%= link_to "Logout", destroy_user_session_path %></p>
-    <%= link_to "Destroy Account", user_path(current_user), method: :delete, data: { confirm: "You sure?" } %>
-  <% else %>
-    <%= link_to "Sign in", new_user_session_path %> or <%= link_to "sign up", new_user_registration_path %>
-  <% end %>
+  
 
 <%= link_to 'create snapshot', new_entry_path(:message_type => 'snapshot') %>
 <%= link_to 'create happening', new_entry_path(:message_type => 'happening') %>
 <%= link_to 'create reflection', new_entry_path(:message_type => 'reflection') %>
+
+
+
 
 <%= yield %>
 
