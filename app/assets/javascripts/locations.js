@@ -106,6 +106,7 @@ var map;
 var infowindow;
 
 function initialize() {
+  hideStuffOnForm();
 
   geocoder = new google.maps.Geocoder();
   var mapOptions = {
@@ -271,15 +272,10 @@ function markerAtLocations(index, array) {
       + "<br>message: " + array[i].message
   }
 
-  var latDistance = array[0].latitude;
-  var longDistance = array[0].longitude;
-
-  
 
   whereAreYou(markerSpot, nearPlaceAlert)
   
   
-
 
 
   // var contentString;
@@ -320,4 +316,17 @@ function handleNoGeolocation(errorFlag) {
 
   var infowindow = new google.maps.InfoWindow(options);
   map.setCenter(options.position);
+}
+
+// if has a location token, hide some stuff on form
+function hideStuffOnForm() {
+  if ($('#loc-token').data('locationtokens') == null || $('#loc-token').data('locationtokens') =="") {
+    console.log("no tokes!!")
+    console.log("uh" + $('#loc-token').data('locationtokens') + "uh")
+  }
+  else {
+    console.log("has tokens!!!!")
+    $('#snapshot-address').hide();
+    $("#entry_message").val("44");
+  }
 }

@@ -54,7 +54,7 @@ class LocationsController < ApplicationController
       temp = []
       temp << location
 
-      location.entries.each do |entry|
+      location.entries.reverse.each do |entry|
         temp << entry
       end
 

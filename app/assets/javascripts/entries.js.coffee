@@ -7,3 +7,4 @@ jQuery ->
     theme: 'facebook',
     propertyToSearch: "title",
     prePopulate: $('#loc-token').data('locationtokens')
+    
