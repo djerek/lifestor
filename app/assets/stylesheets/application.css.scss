@@ -12,6 +12,13 @@
 
  @import "layouts/sidebar";
 
+a:hover {
+  text-decoration: none;
+  -moz-transform: scale(1.07);
+  -webkit-transform: scale(1.07);
+  -o-transform: scale(1.07);
+}
+
 .dropdown {
   font-weight: bold;
 }
