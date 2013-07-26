@@ -35,11 +35,10 @@
             <ul class="nav">
               <% if user_signed_in? %>
               <li>
-                <%= link_to "Logout", destroy_user_session_path %>
+                <%= link_to "Your Journal", entries_path %>
               </li>
               <li>
-                <%= link_to "Destroy Account", user_path(current_user), method: :delete %>
-                <!-- data: { confirm: "You sure?" }  -->
+                <%= link_to "Logout", destroy_user_session_path %>
               </li>
               <% end %>
             </ul>
@@ -53,21 +52,11 @@
 <div class="container-fluid">
   <div class="row-fluid">
     <div class="span2 bs-docs-sidebar">
-      <div class="sidebar">
-        <ul class="nav nav-list bs-docs-sidenav affix">
-          <li id="snapshot-box">
-            <%= link_to 'Snapshot', new_entry_path(:message_type => 'snapshot') %>
-          </li>
-          <li id="happening-box">
-            <%= link_to 'Happening', new_entry_path(:message_type => 'happening') %>
-          </li>
-          <li id="reflection-box">
-            <%= link_to 'Reflection', new_entry_path(:message_type => 'reflection') %>
-          </li>
-        </ul>
-      </div>
+      <% if current_user %>
+        <%= render "entry_sidebar" %>
+        <!-- Note: visitor sidebar later will probably be decorative -->
+      <% end %>
     </div>
-
     <div class="span10">
       <%= yield %>
     </div>
