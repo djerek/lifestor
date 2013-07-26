@@ -52,19 +52,12 @@
 
 
 
-<p><%= link_to "New Entry", new_entry_path %></p>
+<div id="new_snapshot"><%= link_to 'new snapshot', new_entry_path(:message_type => 'snapshot') %></div>
 
 
 <div id="calendar">
   <%= calendar do |date| %>
-    <%= date.day %>
-    <% if @entries_by_date[date] %>
-       <ul>
-      <% @entries_by_date[date].each do |entry| %>
-        <li><%= link_to entry.message_type, entry %></li>
-      <% end %>
-    </ul>
-    <% end %>
+    <%= link_to date.day, entries_path %>
   <% end %>
 </div>
 

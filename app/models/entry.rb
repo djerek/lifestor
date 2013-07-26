@@ -11,11 +11,11 @@ class Entry < ActiveRecord::Base
   attr_reader :location_tokens
   attr_reader :tag_list
 
+  
+
   def location_tokens=(tokens)
     self.location_id = Location.ids_from_tokens(tokens)
   end
-
- 
 
 	def self.titlesearch(titlesearch)
 		if titlesearch
@@ -33,7 +33,9 @@ class Entry < ActiveRecord::Base
       Entry.where('written_on LIKE ?', "%#{writtenonsearch}%").order(:written_on)
   end
 
-
+  def self.datesearch(datesearch)
+      Entry.where('written_on LIKE ?', "%#{date.day}%").order(:written_on)
+  end
 
   def self.tagssearch(tagssearch)
       Entry.select('distinct entries.*').joins("LEFT JOIN taggings on entries.id = taggings.taggable_id").joins("LEFT JOIN tags on tags.id = taggings.tag_id").where('tags.name LIKE ?', "%#{tagssearch}%").order(:title)

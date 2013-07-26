@@ -31,3 +31,42 @@
 	margin-right: 350px;
 	overflow: auto;
 }
+
+#near_places {
+	height: 296px;
+	width: 350px;
+	background: white;
+	border: 1px solid black;
+	border-radius: 6px;
+	float: right;
+	margin-right: 70px;
+	margin-top: 190px;
+	overflow: auto;
+}
+
+#notice_info {
+	font-size: 18px;
+	padding-top: 12px;
+	border-top: 1px dashed black;
+}
+
+#map-canvas{
+	width: 600px; 
+	height: 480px; 
+	margin-left: 70px;
+	margin-right: 20px; 
+	margin-bottom: 10px;
+	margin-top: 5px;
+	float: left;
+}
+
+#find-place{
+	float: left;
+	margin-top: 50px;
+}
+
+#new_snapshot {
+	margin-left: 150px;
+	margin-top: 10px;
+	font-style: italic;
+}
