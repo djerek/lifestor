@@ -21,7 +21,7 @@ jQuery ->
 
       $("#form-latitude").val(gon.locations[number].latitude);
       $("#form-longitude").val(gon.locations[number].longitude);
-      
+
       if gon.locations[number].address
         $("#form-address").val(gon.locations[number].address);
         $("#form-address").attr('readonly', 'readonly');
