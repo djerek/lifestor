@@ -1,4 +1,6 @@
 class CoverController < ApplicationController
+  before_filter :authenticate_user!, except: [:home, :help]
+
   def home
   end
 

@@ -1,17 +1,24 @@
-<!-- <a class="sign-in-box"> -->
+<div class="sign-in-box">
 
-  <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-    <div><%= f.label :email %><br />
-    <%= f.email_field :email, :autofocus => true %></div>
+<h2>Welcome to Lifestor!</h2>
 
-    <div><%= f.label :password %><br />
-    <%= f.password_field :password %></div>
+    <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+      <div><%= f.label :email %>
+      <%= f.email_field :email, :autofocus => true %></div>
 
-    <div><%= f.submit "Sign in" %>
-  <% end %>
+      <div><%= f.label :password %>
+      <%= f.password_field :password %></div>
 
-<!-- </a> -->
-<!-- 
-<script>
-    jQuery('a.sign-in-box').colorbox();
-</script>
+      <input type="submit" class="btn btn-info btn-large" value="Return To Your Story"/>
+
+      <br>
+
+      <a href="new_user_registration_path" class="btn btn-success btn-large">Write Your Story</a>
+
+      <br>
+
+      <a href="cover/home" class="btn btn-danger btn-large">What's Lifestor?</a>
+
+    <% end %>
+
+</div>

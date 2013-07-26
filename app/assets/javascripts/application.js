@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require jquery.ui.datepicker
 //= require jquery.tokeninput
+//= require colorbox-rails
 //= require bootstrap
 //= require_tree .
 

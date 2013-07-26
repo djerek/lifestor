@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::Base
-  before_filter :authenticate_user!
   before_filter :configure_permitted_parameters, if: :devise_controller?
   before_filter :set_user_time_zone
 

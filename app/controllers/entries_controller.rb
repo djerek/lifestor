@@ -1,4 +1,6 @@
 class EntriesController < ApplicationController
+  before_filter :authenticate_user!
+  
   def index
     # I think we may actually want all entries to show up by default, with search as an add-on
     #@entries = Entry.all

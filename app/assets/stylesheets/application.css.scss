@@ -1,5 +1,6 @@
 /*
  *= require jquery.ui.datepicker
+ *= require colorbox-rails
  *= require_self
  *= require token-input-facebook
  */
@@ -11,6 +12,8 @@
  @import "layouts/navbar";
 
  @import "layouts/sidebar";
+
+ @import "cover";
 
 a:hover {
   text-decoration: none;

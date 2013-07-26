@@ -1,4 +1,6 @@
 class LocationsController < ApplicationController
+  before_filter :authenticate_user!
+  
   def index
     @locations = Location.where(user: current_user)
     respond_to do |format|

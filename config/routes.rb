@@ -18,6 +18,7 @@ Project2::Application.routes.draw do
 
   as :user do
     get "login" => "devise/sessions#new", :as => :new_user_session
+    get "devise/sessions/_sign_in"
     post 'login' => 'devise/sessions#create', :as => :user_session
     match "logout" => "devise/sessions#destroy", :as => :destroy_user_session, via: [:get, :post]
   end

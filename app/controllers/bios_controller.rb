@@ -1,4 +1,5 @@
 class BiosController < ApplicationController
+  before_filter :authenticate_user!
   before_action :set_bio, only: [:show, :edit, :update, :destroy]
 
   # GET /bios
