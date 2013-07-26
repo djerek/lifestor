@@ -29,8 +29,6 @@
     
   </div>
 
-  <div id="place-results"><input type="button" value="Show nearby places" onclick="pickPlace()" id="nearbyplaces"><p id="resultshere"></p></div>
-
   <div id="snapshot-address">
     <%= f.label :address %><br />
     
@@ -44,10 +42,15 @@
   </div>
 
 
+  <div id="place-results"><input type="button" value="Show nearby places" onclick="pickPlace()" id="nearbyplaces"><p id="resultshere"></p></div>
 
 
 
-   <div id="snapshot-latitude">
+
+
+
+
+  <div id="snapshot-latitude">
     <%= f.label :latitude %><br />
     <%= f.text_field :latitude, value: params[:latitude], :readonly => true, :id => "form-latitude" %>
   </div>

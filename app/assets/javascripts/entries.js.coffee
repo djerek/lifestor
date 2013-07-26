@@ -31,8 +31,10 @@ jQuery ->
         $('#snapshot-address').hide();
 
     else
-      alert("nono")
+      console.log("nono")
 
   undoHideForm = ->
     $('#snapshot-address').show();
+    $("#form-address").attr('readonly', null);
+    $('#somebuttons').show();
     console.log("ha ha!")

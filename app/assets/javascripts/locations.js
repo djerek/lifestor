@@ -326,8 +326,21 @@ function hideStuffOnForm() {
     console.log("uh" + $('#loc-token').data('locationtokens') + "uh")
     // $('#entry_location_tokens').tokenInput.deleteText="hi";
   }
-  else {
+  else { // if has a token
     console.log("has tokens!!!!")
-    $('#snapshot-address').hide();
+      console.log($('#loc-token').data('locationtokens')[0].latitude)
+      var the_location = $('#loc-token').data('locationtokens')[0]
+      $("#form-latitude").val(the_location.latitude);
+      $("#form-longitude").val(the_location.longitude);
+
+      if (the_location.address) {
+        $("#form-address").val(the_location.address);
+        $("#form-address").attr('readonly', 'readonly');
+        $('#somebuttons').hide();
+      }
+
+      else {
+        $('#snapshot-address').hide();
+      }
   }
 }

@@ -24,12 +24,30 @@
 #map-canvas { height: 100% }
 #map-canvas img{max-width:none;}
 
-#place-results {
-	height: 300px;
-	width: 200px;
-	border: 10px solid black;
-	background: green;
+#snapshot-location {
+	/*float: left;*/
+}
+
+#snapshot-latitude {
+	/*float: left;*/
+}
+
+#snapshot-address {
+
+	width: 300px;
 	float: right;
 	margin-right: 350px;
-	overflow: auto;
+	margin-bottom: 10px;
+
+}
+
+#place-results {
+	height: 300px;
+	width: 300px;
+	border: 10px solid black;
+	background: green;
+	clear: both;
+	float: right;
+	margin-right: 350px;
+
 }
