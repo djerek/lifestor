@@ -146,9 +146,7 @@ function initialize() {
         map: map,
         position: pos,
 
-        content: currentLocationWindow + '<br>click on the map to add a marker'
-          + "<br>current latitude: " + position.coords.latitude
-          + "<br>current longitude: " + position.coords.longitude
+        content: currentLocationWindow + '<br>or click on the map to add marker'
       });
 
       
@@ -256,8 +254,7 @@ function markerAtLocations(index, array) {
   var contentString = "<a href='" + $('#new_entry_path').data('path') 
     + "&location_tokens=" + array[0].id
     + "'>add another entry to this location?</a>" 
-    + "<br>title: " + array[0].title 
-    + "<br>latitude: " + array[0].latitude + "<br>longitude: " + array[0].longitude
+    + "<br>title: " + array[0].title
 
 if (array[0].title) {
    var nearPlaceAlert = '<br>' + '<div id="notice_info">' + '<strong>' + array[0].title + '</strong>'
