@@ -6,13 +6,13 @@ source 'http://rubygems.org'
 gem 'rails',    github: 'rails/rails'
 gem 'arel',      github: 'rails/arel'
 
-# Use sqlite3 as the database for Active Record
-
 gem 'twitter-bootstrap-rails'
 
 gem 'simple_form'
 
 gem "less-rails-bootstrap", "~> 2.3.3"
+
+gem "colorbox-rails", "~> 0.1.0"
 
 # Use edge version of sprockets-rails
 gem 'sprockets-rails', github: 'rails/sprockets-rails'
@@ -29,6 +29,8 @@ gem 'coffee-rails', github: 'rails/coffee-rails'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 gem 'therubyracer', platforms: :ruby
 
+# Passwords and session control
+
 gem 'devise', '3.0.0.rc'
 
 # Use jquery as the JavaScript library
@@ -38,6 +40,9 @@ gem 'jquery-ui-rails'
 gem 'gon'
 
 gem 'quiet_assets'
+
+# Better server than Webrick for development and especially production
+gem 'unicorn-rails'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 # gem 'turbolinks'
@@ -67,9 +72,9 @@ gem 'whenever', require: false
 
 gem "acts-as-taggable-on", "~> 2.4.1"
 
-# Update Whenever changes on deployment
+# Version control for bios
 
-gem "capistrano", :group => :development
+# gem 'paper_trail'
 
 # Better debugging
 gem "better_errors"
@@ -119,11 +124,8 @@ end
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
-# Use unicorn as the app server
-# gem 'unicorn'
-
 # Use Capistrano for deployment
-# gem 'capistrano', group: :development
+gem 'capistrano', group: :development
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]

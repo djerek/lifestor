@@ -18,6 +18,7 @@ class EntriesController < ApplicationController
 
   def new
     @entry = Entry.new
+    @entry.user = current_user
     @questions = Question.all.select {|q| q.is_active }
     @questions.each do |q|
     @entry.answers.build(question: q)
@@ -55,9 +56,6 @@ class EntriesController < ApplicationController
 
     # if making a new location: take lat and long and address
     # if Location.where(id: @entry.location_id).blank?
-
-
-    @entry.user = current_user
 
     # raise @entry.location.id.to_yaml
     if @entry.save

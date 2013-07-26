@@ -1,4 +1,5 @@
 Project2::Application.routes.draw do  
+
   get "cover/home"
   get "cover/help"
   get "cover/welcome"
@@ -9,6 +10,7 @@ Project2::Application.routes.draw do
   resources :questions
   resources :entries
   resources :locations
+  resources :bios
   devise_for :users, :skip => [:sessions]
   resources :users
 
