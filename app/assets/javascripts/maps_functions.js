@@ -50,24 +50,17 @@ function pickPlace() {
     {
   
       // if(navigator.geolocation) {
-             
-      navigator.geolocation.getCurrentPosition(function(position) {
-        console.log('here')
-        centerPlace = new google.maps.LatLng(position.coords.latitude,
-                                         position.coords.longitude);
+      if (!current_position) {
+        console.log("start wait")
+        setTimeout(pickPlace,1000)
+        console.log("end wait")
+      }
 
-        console.log("centerplace current location" + centerPlace)
-        console.log(map)
-        nearPlace(centerPlace)
-      }, function() {
-        handleNoGeolocation(true);
-      });
-      
 
-        // } else {
-        // Browser doesn't support Geolocation
-        // handleNoGeolocation(false);
-        //     }
+      console.log("centerplace current location" + current_position)
+      console.log(map)
+      nearPlace(current_position)
+
   
     }
     else
@@ -93,7 +86,9 @@ function nearPlace(centerPlace) {
 
   var service = new google.maps.places.PlacesService(map);
   console.log("map  " + map)
+  $("#resultshere").empty();
   service.nearbySearch(request, callback);
+  document.getElementById('nearbyplaces').style.background="orange";
 
 }
 
@@ -182,6 +177,8 @@ function formAddress() {
 
       $("#form-latitude").val(results[0].geometry.location.jb);
       $("#form-longitude").val(results[0].geometry.location.kb);
+      document.getElementById('currentlocationbutton').style.background=null;
+      document.getElementById('addressbutton').style.background="orange";
 
     } else {
       alert('Geocode was not successful for the following reason: ' + status);
@@ -191,35 +188,32 @@ function formAddress() {
 
 // use current location on entry form
 function formCurrentLocation() {
+  if (!current_position) {
+    console.log("start wait")
+    setTimeout(formCurrentLocation,1000)
+    // formCurrentLocation();
+    console.log("end wait")
+  }
+
+  var tokes = $('#entry_location_tokens').val()
+  // alert("U HAVE TOKEEES " + tokes)
+  // $('#entry_location_tokens').tokenInput;
   console.log("currentlocation probs loading")
   if (document.getElementById('currentlocationbutton').style.background != "orange") {
-    alert("it's not orange so getting current location");
+    console.log("it's not orange so getting current location");
 
-    // Try HTML5 geolocation
-    if(navigator.geolocation) {
-      console.log("currentlocation probs trying")
-      navigator.geolocation.getCurrentPosition(function(position) {
-        
-        // set lat and long to current coordinates
-        var latitude = position.coords.latitude;
-        var longitude = position.coords.longitude;
 
-        $("#form-latitude").val(latitude);
-        $("#form-longitude").val(longitude);
+
+
+        $("#form-latitude").val(current_position.jb);
+        $("#form-longitude").val(current_position.kb);
         
         // $("#currentlocationbutton").background(color);
         document.getElementById('currentlocationbutton').style.background="orange";
+        document.getElementById('addressbutton').style.background=null;
+        // document.getElementById('entry_location_tokens').deleteText="DKL";
         console.log("currentlocation probs done")
 
-
-      }, function() {
-        handleNoGeolocation(true);
-      });
-
-    } else {
-      // Browser doesn't support Geolocation
-      handleNoGeolocation(false);
-    }
   }
 
   // if it is orange, so getting rid of current location

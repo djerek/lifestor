@@ -24,20 +24,23 @@
   <%= f.hidden_field :type, value: 'snapshot' %>
 
   <div id="snapshot-location">
-    <%= f.label :location_tokens, "Location" %><br />
+    <%= f.label :location_tokens, "Name of this place?" %><br />
     <%= f.text_field :location_tokens %>
-    <input type="button" value="Show nearby places" onclick="pickPlace()">
+    
   </div>
 
-  <div id="place-results"></div>
+  <div id="place-results"><input type="button" value="Show nearby places" onclick="pickPlace()" id="nearbyplaces"><p id="resultshere"></p></div>
 
   <div id="snapshot-address">
     <%= f.label :address %><br />
-
+    
     <%= f.text_field :address, value: params[:address], :id => "form-address" %>
-    <input type="button" value="pick this place" onclick="formAddress()">
-    OR
-    <input type="button" value="use current location" onclick="formCurrentLocation()" id="currentlocationbutton">
+
+      <span id="somebuttons"><input type="button" value="pick this place" onclick="formAddress()" id="addressbutton">
+      OR
+      <input type="button" value="use current location" onclick="formCurrentLocation()" id="currentlocationbutton">
+    </span>
+    
   </div>
 
 
@@ -55,10 +58,7 @@
   </div>
 
 
-  <div>
-    <%= f.label :title %><br />
-    <%= f.text_field :title %>
-  </div>
+
   <p>
     <%= f.label :message %><br />
     <%= f.text_field :message %>

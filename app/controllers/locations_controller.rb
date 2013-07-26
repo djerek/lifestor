@@ -41,7 +41,8 @@ class LocationsController < ApplicationController
 
     # get_close_locations(41, -73)
     gon.entries = current_user.entries
-    gon.locations = current_user.locations
+
+    # raise gon.location_ids.to_yaml
     gon.current_user = current_user
 
 

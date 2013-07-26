@@ -8,6 +8,7 @@
  *
  */
 
+
 (function ($) {
 // Default settings
 var DEFAULT_SETTINGS = {
@@ -191,7 +192,6 @@ $.fn.tokenInput = function (method) {
         return methods.init.apply(this, arguments);
     }
 };
-
 // TokenList class for each input
 $.TokenList = function (input, url_or_data, settings) {
     //

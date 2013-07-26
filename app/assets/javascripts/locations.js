@@ -1,3 +1,4 @@
+var current_position;
 
 function whereAreYou(markerSpot, nearPlaceAlert){
   if(navigator.geolocation) {
@@ -27,8 +28,7 @@ function whereAreYou(markerSpot, nearPlaceAlert){
     handleNoGeolocation(false);
   }
 }
-// alert(gon.locations)
-// alert(gon.location_entries_array.length)
+
 
 /**
  * The HomeControl adds a control to the map that
@@ -125,6 +125,7 @@ function initialize() {
     navigator.geolocation.getCurrentPosition(function(position) {
       var pos = new google.maps.LatLng(position.coords.latitude,
                                        position.coords.longitude);
+      current_position = pos;
 
       var currentLocationWindow = "<a href='" + $('#new_entry_path').data('path') 
       + "&latitude=" + pos.jb 
@@ -201,7 +202,7 @@ function callback(results, status) {
     for (var i = 0; i < results.length; i++) {
       placeObject = results[i]
       // content = content + placeObject.name + placeObject.vicinity;
-      $("#place-results").append('<li>' + placeObject.name + '</li>' + '<li>' + placeObject.vicinity + '</li>');
+      $("#resultshere").append('<li>' + placeObject.name + '</li>' + '<li>' + placeObject.vicinity + '</li>');
       console.log("from callback" + placeObject.vicinity);
     }
   }
@@ -323,10 +324,10 @@ function hideStuffOnForm() {
   if ($('#loc-token').data('locationtokens') == null || $('#loc-token').data('locationtokens') =="") {
     console.log("no tokes!!")
     console.log("uh" + $('#loc-token').data('locationtokens') + "uh")
+    // $('#entry_location_tokens').tokenInput.deleteText="hi";
   }
   else {
     console.log("has tokens!!!!")
     $('#snapshot-address').hide();
-    $("#entry_message").val("44");
   }
 }

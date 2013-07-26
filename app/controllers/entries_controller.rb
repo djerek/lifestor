@@ -9,6 +9,17 @@ class EntriesController < ApplicationController
 
   def new
     @entry = Entry.new
+    gon.location_ids = []
+    current_user.locations.each do |location|
+      gon.location_ids << location.id
+    end
+
+    gon.locations = Hash.new
+    current_user.locations.each do |location|
+      the_id = location.id
+      gon.locations[the_id] = location
+    end
+    # raise gon.locations[31].to_yaml
   end
 
   def create
