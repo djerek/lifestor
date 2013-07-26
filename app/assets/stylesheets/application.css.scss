@@ -44,36 +44,38 @@ a:hover {
 }
 
 #near_places {
-  height: 296px;
-  width: 350px;
+  height: 480px;
+  width: 300px;
   background: white;
   border: 1px solid black;
-  border-radius: 6px;
   float: right;
-  margin-right: 70px;
-  margin-top: 190px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 80px;
   overflow: auto;
+  text-align: center;
 }
 
 #notice_info {
   font-size: 18px;
   padding-top: 12px;
   border-top: 1px dashed black;
+  margin-right: 0px;
 }
 
 #map-canvas{
-  width: 600px; 
+  width: 608px; 
   height: 480px; 
-  margin-left: 70px;
-  margin-right: 20px; 
-  margin-bottom: 10px;
+  margin-left: 10px;
+  margin-right: 1px; 
+  margin-bottom: 50px;
   margin-top: 5px;
-  float: left;
 }
 
 #find-place{
-  float: left;
+  margin-left: -90px;
   margin-top: 50px;
+  border-radius: 5px;
 }
 
 #new_snapshot {
@@ -81,3 +83,4 @@ a:hover {
   margin-top: 10px;
   font-style: italic;
 }
+
