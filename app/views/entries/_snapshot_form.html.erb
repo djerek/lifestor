@@ -13,12 +13,12 @@
 
 
   <div id="snapshot-location">
-    <%= f.label :location_tokens, "Location" %><br />
-    <%= f.text_field :location_tokens %>
-    <input type="button" value="Show nearby places" onclick="pickPlace()">
+    <%= f.label :location_tokens, "Location *" %><br />
+    <%= f.text_field :location_tokens, :required => true %>
   </div>
 
-  <div id="place-results"></div>
+  
+  <div id="place-results"><input type="button" value="Show nearby places" onclick="pickPlace()"></div>
 
   <div id="snapshot-address">
     <%= f.label :address %><br />
@@ -53,10 +53,10 @@
     <%= f.text_field :written_on %>
   </p>
 
-  <p>
-    <%= f.label :remote_image_url, "or image URL" %>
-    <%= f.input :remote_image_url %>
-  </p>
+ <!--  <p>
+    <%#= f.label :remote_image_url, "or image URL" %>
+    <%#= f.input :remote_image_url %>
+  </p> -->
 
   <p>
     <%= f.input :title %>

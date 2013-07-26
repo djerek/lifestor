@@ -6,8 +6,9 @@ class EntriesController < ApplicationController
     @entries = @current_entries.titlesearch(params[:titlesearch])
     @entries = @current_entries.messagesearch(params[:messagesearch]) if params[:messagesearch].present?
     @entries = @current_entries.writtenonsearch(params[:writtenonsearch]) if params[:writtenonsearch].present?
+    @entries = @current_entries.datesearch(params[:datesearch]) if params[:datesearch].present?
     @entries = @current_entries.tagssearch(params[:tagssearch]) if params[:tagssearch].present?
-    @entries_by_date = @entries.group_by(&:written_on)
+    #@entries_by_date = @entries.group_by(&:written_on)
     #@names = @entry
   end
 
@@ -31,7 +32,7 @@ class EntriesController < ApplicationController
     make_new_location = Location.where(id: entry_params[:location_tokens]).blank?
 
     @entry = Entry.new(entry_params)
-    @entry.user = current_user
+
 
     # if !@entry.location
     #   # no location id given
@@ -61,6 +62,8 @@ class EntriesController < ApplicationController
     # raise @entry.location.id.to_yaml
     if @entry.save
 
+
+
       if make_new_location
         loca = Location.where(id: @entry.location_id).take
         loca.latitude = @entry.latitude
@@ -70,7 +73,7 @@ class EntriesController < ApplicationController
         loca.save
       end
 
-      redirect_to locations_showmap_path, :notice => "Successfully created entry."
+      redirect_to locations_showmap_path
     else
       render :action => 'new'
     end

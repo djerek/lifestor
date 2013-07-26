@@ -14,7 +14,7 @@ function whereAreYou(markerSpot, nearPlaceAlert){
     console.log('markerspotlathigh' + markerSpotLatHigh + 'whereareyoupostlat' + whereAreYouPosLat)
       if((markerSpotLatHigh >= whereAreYouPosLat) && (markerSpotLatLow <= whereAreYouPosLat) && (markerSpotLongHigh >= whereAreYouPosLong) && (markerSpotLongLow <= whereAreYouPosLong)) {
         console.log(markerSpot)
-        $('.notice').append(nearPlaceAlert);
+        $('#near_places').append(nearPlaceAlert);
       }
       }, function() {
       handleNoGeolocation(true);
@@ -106,6 +106,7 @@ var map;
 var infowindow;
 
 function initialize() {
+  $('#near_places').append("Entries Made Near Your Current Location" + '<br />' + '<br />')
   hideStuffOnForm();
 
   geocoder = new google.maps.Geocoder();
@@ -163,7 +164,7 @@ function initialize() {
       console.log(pos.kb)
       console.log(addressLongitude)
       if((pos.jb > addressLatitude - 0.001 ) && (pos.jb < addressLatitude + 0.001) && (pos.kb > addressLongitude - 0.001) && (pos.kb < addressLongitude + 0.001)) {
-        $('.notice').append("Finally you're home. " 
+        $('#near_places').append("Finally you're home. " 
           + "<a href='" + $('#new_entry_path').data('path') 
           + "'>Make an entry?</a><br>")
       }
@@ -258,19 +259,24 @@ function markerAtLocations(index, array) {
     + "<br>title: " + array[0].title 
     + "<br>latitude: " + array[0].latitude + "<br>longitude: " + array[0].longitude
 
-  var nearPlaceAlert = "You made an entry near this spot: " + array[0].title
-    + "<br>" + "<a href='" + $('#new_entry_path').data('path') 
+if (array[0].title) {
+   var nearPlaceAlert = '<br>' + '<div id="notice_info">' + '<strong>' + array[0].title + '</strong>'
+    + '</div>' + '<u>' + '<em>' + '<div>' + "<a href='" + $('#new_entry_path').data('path') 
     + "&location_tokens=" + array[0].id
-    + "'>add another entry to this location?</a><br>"
+    + "'>add another entry to this location?</a>" + '</div>' + '</em>' + '</u>'
+  }
 
   for (var i = 1; i < array.length; i++) {
+    console.log("array0title    " + array[0].title)
 
-    nearPlaceAlert = nearPlaceAlert + "   You said: " + array[i].message + "<br>"
-
+    if (array[i].written_on) {
+    nearPlaceAlert = '<div>' + nearPlaceAlert + '</div>' + '<br />' + '<li>' + array[i].written_on + ': ' + array[i].message + '</li>'
+      }
 
     contentString = contentString + "<br>Entry " + i + " title: " + array[i].title
       + "<br>message: " + array[i].message
   }
+
 
 
   whereAreYou(markerSpot, nearPlaceAlert)
