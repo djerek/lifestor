@@ -1,0 +1,55 @@
+.navbar .brand, .navbar .nav > li > a {
+    color: $theme3;
+}
+.navbar .brand, .navbar .nav > li > a:hover {
+    color: black;
+}
+
+.navbar {
+    margin-bottom:10px;
+
+  .container-fluid {
+    min-height: 80px;
+  }
+
+  #navbar-content {
+    margin-top: 25px;
+    font-weight: bold;
+    text-decoration: none;
+  }
+
+  .logo {
+    float: left;
+    display: block;
+    margin-left: -20px;
+    margin-right: 100px;
+    font-size: 40px;
+    color: #000;
+
+    hover {
+      color: $theme3;
+    }
+  }
+
+  .nav {
+    float: right;
+
+    li {
+      font-size: 25px;
+      margin-top: 2px;
+      padding: 0px 10px 0px 10px;
+
+      a {
+        padding: 0px;
+      }
+    }
+  }
+
+}
+
+.navbar-inner {
+  background-color: $theme4; 
+  background-image: none;
+  background-repeat: no-repeat;
+  filter: none;
+}

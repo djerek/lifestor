@@ -26,5 +26,11 @@ private
     devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:latitude, :longitude, :email, :password, :password_confirmation, :current_password, :address) }
   end
 
+  private
+
+  def after_sign_up_path_for(resource)
+    'cover/welcome'
+  end
+  
 end
 

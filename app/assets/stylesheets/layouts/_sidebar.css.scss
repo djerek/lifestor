@@ -1,0 +1,31 @@
+.sidebar {
+  margin-left: -15%;
+  margin-top: -10px;
+
+  li {
+    font-size: 24px;
+    padding: 40px;
+  }
+
+  a {
+    color: black;
+    text-shadow: none;
+  }
+
+  a:hover {
+    background-color: none;
+  }
+
+
+  #snapshot-box {
+    background-color: $theme1;
+  }
+
+  #happening-box {
+    background-color: $theme2;
+  }
+
+  #reflection-box {
+    background-color: $theme3;
+  }
+}

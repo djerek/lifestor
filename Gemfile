@@ -6,11 +6,11 @@ source 'http://rubygems.org'
 gem 'rails',    github: 'rails/rails'
 gem 'arel',      github: 'rails/arel'
 
-gem 'twitter-bootstrap-rails'
+# gem 'twitter-bootstrap-rails'
 
 gem 'simple_form'
-
-gem "less-rails-bootstrap", "~> 2.3.3"
+gem 'bootstrap-sass'
+# gem "less-rails-bootstrap", "~> 2.3.3"
 
 gem "colorbox-rails", "~> 0.1.0"
 

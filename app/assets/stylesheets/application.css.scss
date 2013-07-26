@@ -1,0 +1,34 @@
+/*
+ *= require jquery.ui.datepicker
+ *= require_self
+ *= require token-input-facebook
+ */
+
+ @import "bootstrap_and_overrides";
+
+ @import "layouts/application";
+
+ @import "layouts/navbar";
+
+ @import "layouts/sidebar";
+
+.dropdown {
+  font-weight: bold;
+}
+
+.dropdown-menu {
+  font-weight: normal;
+}
+
+#map-canvas { height: 100% }
+#map-canvas img{max-width:none;}
+
+#place-results {
+	height: 300px;
+	width: 200px;
+	border: 10px solid black;
+	background: green;
+	float: right;
+	margin-right: 350px;
+	overflow: auto;
+}

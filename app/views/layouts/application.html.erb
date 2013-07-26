@@ -26,47 +26,50 @@
 
 <div class="navbar">
   <div class="navbar-inner">
-    <a class="brand" href='root_path'>Logo Goes Here</a>
-    <ul class="nav">
-      <% if user_signed_in? %>
-      <li>
-      You are <%= current_user.email %>
-      </li>
-      <li>
-      <%= link_to "Logout", destroy_user_session_path %></li>
-      <li>
-      <%= link_to "Destroy Account", user_path(current_user), method: :delete, data: { confirm: "You don't want to do this. Please reconsider." } %>
-      </li>
-      <% else %>
-      <li>
-        <%= link_to "Sign in", new_user_session_path %> or <%= link_to "sign up", new_user_registration_path %>
-      </li>
-      <% end %>
-    </ul>
+    <div class ="container-fluid">
+      <div id="navbar-content">
+        <a class="logo" href='root_path'>Logo Goes Here</a>
+            <ul class="nav">
+              <% if user_signed_in? %>
+              <li>
+                <%= link_to "Logout", destroy_user_session_path %>
+              </li>
+              <li>
+                <%= link_to "Destroy Account", user_path(current_user), method: :delete %>
+                <!-- data: { confirm: "You sure?" }  -->
+              </li>
+              <% end %>
+            </ul>
+          </div>
+    </div>
   </div>
 </div>
 
 <body>
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
-<<<<<<< HEAD
-  
 
-<%= link_to 'create snapshot', new_entry_path(:message_type => 'snapshot') %>
-<%= link_to 'create happening', new_entry_path(:message_type => 'happening') %>
-<%= link_to 'create reflection', new_entry_path(:message_type => 'reflection') %>
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span3 bs-docs-sidebar">
+      <div class="sidebar">
+        <ul class="nav nav-list bs-docs-sidenav affix">
+          <li id="snapshot-box">
+            <%= link_to 'Snapshot', new_entry_path(:message_type => 'snapshot') %>
+          </li>
+          <li id="happening-box">
+            <%= link_to 'Happening', new_entry_path(:message_type => 'happening') %>
+          </li>
+          <li id="reflection-box">
+            <%= link_to 'Reflection', new_entry_path(:message_type => 'reflection') %>
+          </li>
+        </ul>
+      </div>
+    </div>
 
-
-
-=======
-  <% if user_signed_in? %>
-    <p>You are <%= current_user.email %>
-    <%= link_to "Logout", destroy_user_session_path %></p>
-    <%= link_to "Destroy Account", user_path(current_user), method: :delete, data: { confirm: "You sure?" } %>
-  <% end %>
->>>>>>> 7961fd92351d9719bb30ce06ae64120e81da00b6
-
-<%= yield %>
+    <div class="span9">
+      <%= yield %>
+    </div>
+  </div>
+</div>
 
 <script type="text/javascript">
    $('.dropdown-menu').on('click', function (e) {

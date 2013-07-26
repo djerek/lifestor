@@ -14,7 +14,7 @@
 //= require jquery_ujs
 //= require jquery.ui.datepicker
 //= require jquery.tokeninput
-//= require twitter/bootstrap
+//= require bootstrap
 //= require_tree .
 
 $(function() {
